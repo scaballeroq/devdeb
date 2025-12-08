@@ -2,7 +2,7 @@
 
 ## 📋 Descripción
 
-Esta guía explica cómo usar el script de instalación independiente de Neovim + LazyVim que NO requiere tener DevDeb instalado.
+Esta guía explica cómo usar el script de instalación de Neovim + LazyVim.
 
 ---
 
@@ -41,7 +41,7 @@ cd ~/Workspace/Repositorios/Instalación/devdeb
 nvim
 ```
 
-En el primer inicio, LazyVim descargará automáticamente todos los plugins. Esto puede tomar **2-5 minutos** dependiendo de tu conexión.
+En el primer inicio, LazyVim descargará automáticamente todos los plugins. Esto puede tomar **varios minutos** dependiendo de tu conexión.
 
 ### Paso 3: Esperar y Reiniciar
 

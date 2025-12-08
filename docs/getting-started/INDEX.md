@@ -64,6 +64,18 @@ Bienvenido al proyecto **DevDeb**, una adaptación de DevDeb para Debian 13 Trix
    - Ejemplos de uso
    - **Lectura estimada**: 15-20 minutos
 
+9. **[GUIA_MISE.md](GUIA_MISE.md)** - Gestor de Versiones Mise
+   - Instalación y configuración de Mise
+   - Gestión de versiones de lenguajes
+   - Uso por proyecto y ejemplos prácticos
+   - **Lectura estimada**: 20-25 minutos
+
+10. **[GUIA_LENGUAJES.md](GUIA_LENGUAJES.md)** - Instalación de Lenguajes de Programación
+    - Guía del script select-dev-language.sh
+    - 8 lenguajes: Ruby, Node.js, Go, PHP, Python, Elixir, Rust, Java
+    - Ejemplos de uso y proyectos de inicio
+    - **Lectura estimada**: 30-35 minutos
+
 9. **[COMPATIBILIDAD_ZSH.md](COMPATIBILIDAD_ZSH.md)** - Compatibilidad con Zsh
     - Análisis de todos los scripts
     - Guía para usuarios de Zsh
