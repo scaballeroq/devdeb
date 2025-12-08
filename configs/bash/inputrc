@@ -1,0 +1,49 @@
+# Inputrc Mejorado para DevDeb
+# Basado en la configuración de Omarchy
+# Mejora la experiencia de línea de comandos en Bash
+
+# Soporte para caracteres UTF-8
+set meta-flag on
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Autocompletado case-insensitive (no distingue mayúsculas/minúsculas)
+set completion-ignore-case on
+
+# Mostrar prefijo común en autocompletado
+set completion-prefix-display-length 2
+
+# Mostrar todas las opciones si hay ambigüedad
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+
+# Búsqueda en historial con flechas arriba/abajo
+# Escribe parte del comando y usa ↑ para buscar en historial
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
+
+# Añadir barra al final al autocompletar symlinks a directorios
+set mark-symlinked-directories on
+
+# No autocompletar archivos ocultos a menos que empieces con punto
+set match-hidden-files off
+
+# Mostrar todas las opciones de autocompletado de una vez (sin paginación)
+set page-completions off
+
+# Preguntar si hay más de 200 opciones de autocompletado
+set completion-query-items 200
+
+# Mostrar información extra de archivos al autocompletar (como ls -F)
+set visible-stats on
+
+# Autocompletado inteligente: considera texto después del cursor
+# Ejemplo: si tienes "cd ~/src/mozil|la" (cursor en |)
+# y presionas Tab, autocompleta a "cd ~/src/mozilla" (no "mozillala")
+set skip-completed-text on
+
+# Colores en autocompletado (Bash 4+)
+set colored-stats on

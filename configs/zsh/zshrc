@@ -1,0 +1,216 @@
+# Configuración de Zsh para DevDeb
+# Basado en mejores prácticas y componentes de Omarchy
+
+# Si no es interactivo, no hacer nada
+[[ $- != *i* ]] && return
+
+# ============================================================================
+# HISTORIAL
+# ============================================================================
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Opciones de historial
+setopt HIST_IGNORE_ALL_DUPS  # No guardar duplicados
+setopt HIST_FIND_NO_DUPS     # No mostrar duplicados al buscar
+setopt HIST_SAVE_NO_DUPS     # No guardar duplicados en archivo
+setopt SHARE_HISTORY         # Compartir historial entre sesiones
+setopt APPEND_HISTORY        # Añadir al historial (no sobrescribir)
+setopt INC_APPEND_HISTORY    # Añadir inmediatamente
+setopt HIST_REDUCE_BLANKS    # Eliminar espacios extra
+
+# ============================================================================
+# AUTOCOMPLETADO
+# ============================================================================
+
+# Activar sistema de autocompletado
+autoload -Uz compinit
+compinit
+
+# Opciones de autocompletado
+setopt AUTO_MENU             # Mostrar menú de autocompletado
+setopt COMPLETE_IN_WORD      # Completar desde posición del cursor
+setopt ALWAYS_TO_END         # Mover cursor al final después de completar
+
+# Autocompletado case-insensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# Colores en autocompletado
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Menú de selección para autocompletado
+zstyle ':completion:*' menu select
+
+# Cache de autocompletado
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+# ============================================================================
+# NAVEGACIÓN
+# ============================================================================
+
+# Cambiar de directorio sin escribir 'cd'
+setopt AUTO_CD
+
+# Pushd automático (historial de directorios)
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+
+# ============================================================================
+# CORRECCIÓN
+# ============================================================================
+
+# Corrección de comandos
+setopt CORRECT
+
+# ============================================================================
+# TECLAS
+# ============================================================================
+
+# Modo emacs para edición de línea
+bindkey -e
+
+# Búsqueda en historial con flechas
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+# Ctrl+Left/Right para mover palabra por palabra
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+# Home/End
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+
+# Delete
+bindkey '^[[3~' delete-char
+
+# ============================================================================
+# PROMPT (STARSHIP)
+# ============================================================================
+
+# Inicializar Starship si está instalado
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+fi
+
+# ============================================================================
+# MISE (GESTOR DE VERSIONES)
+# ============================================================================
+
+# Activar mise si está instalado
+if command -v mise &> /dev/null; then
+    eval "$(mise activate zsh)"
+fi
+
+# ============================================================================
+# HERRAMIENTAS MODERNAS
+# ============================================================================
+
+# eza (ls mejorado)
+if command -v eza &> /dev/null; then
+    alias ls='eza -lh --group-directories-first --icons=auto'
+    alias lsa='ls -a'
+    alias lt='eza --tree --level=2 --long --icons --git'
+    alias lta='lt -a'
+fi
+
+# bat (cat con syntax highlighting)
+if command -v bat &> /dev/null; then
+    alias cat='bat --style=auto'
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
+
+# fzf (búsqueda fuzzy)
+if command -v fzf &> /dev/null; then
+    # Búsqueda de archivos con preview
+    alias ff="fzf --preview 'bat --style=numbers --color=always {}' 2>/dev/null || fzf"
+    
+    # Configuración de fzf
+    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
+    
+    # Usar fd con fzf si está disponible
+    if command -v fd &> /dev/null; then
+        export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    fi
+fi
+
+# zoxide (cd inteligente)
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+    alias cd="z"
+fi
+
+# ripgrep
+if command -v rg &> /dev/null; then
+    alias grep='rg'
+fi
+
+# ============================================================================
+# ALIASES GENERALES
+# ============================================================================
+
+# Navegación rápida
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Git shortcuts
+alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gcam='git commit -a -m'
+alias gcad='git commit -a --amend'
+alias gp='git push'
+alias gl='git pull'
+alias gd='git diff'
+alias gco='git checkout'
+alias gb='git branch'
+alias glog='git log --oneline --graph --decorate'
+
+# Docker shortcuts
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps'
+alias di='docker images'
+
+# Herramientas de desarrollo
+alias r='rails'
+alias n='nvim'
+
+# Neovim inteligente: sin argumentos abre directorio actual
+n() { 
+    if [ "$#" -eq 0 ]; then 
+        nvim .
+    else 
+        nvim "$@"
+    fi
+}
+
+# Abrir archivos con aplicación predeterminada
+open() {
+    xdg-open "$@" >/dev/null 2>&1 &
+}
+
+# ============================================================================
+# FUNCIONES DE DEVDEB
+# ============================================================================
+
+# Cargar funciones de DevDeb si existen
+if [ -f ~/Workspace/Repositorios/Instalación/devdeb/functions.sh ]; then
+    source ~/Workspace/Repositorios/Instalación/devdeb/functions.sh
+fi
+
+# ============================================================================
+# PERSONALIZACIÓN
+# ============================================================================
+
+# Añade tus propias configuraciones, aliases y funciones aquí
+# Ejemplo:
+# alias mi_alias='mi_comando'
+# export MI_VARIABLE='valor'

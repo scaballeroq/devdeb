@@ -1,0 +1,75 @@
+#!/bin/bash
+
+################################################################################
+# DOCKER.SH - Instalación y Configuración de Docker
+################################################################################
+# Descripción:
+#   Este script instala Docker Engine y sus componentes relacionados desde
+#   el repositorio oficial de Docker. También configura el sistema para un
+#   uso óptimo de Docker.
+#
+# Componentes instalados:
+#   - docker-ce: Docker Community Edition (motor principal)
+#   - docker-ce-cli: Interfaz de línea de comandos
+#   - containerd.io: Runtime de contenedores
+#   - docker-buildx-plugin: Constructor de imágenes multi-plataforma
+#   - docker-compose-plugin: Orquestación de múltiples contenedores
+#   - docker-ce-rootless-extras: Soporte para Docker sin root
+#
+# Configuraciones aplicadas:
+#   1. Añade el usuario actual al grupo docker (acceso sin sudo)
+#   2. Limita el tamaño de logs (10MB por archivo, máximo 5 archivos)
+#
+# Adaptaciones para Debian:
+#   - Cambiar URL de repositorio de Ubuntu a Debian
+#   - URL: https://download.docker.com/linux/debian/
+#   - Usar $(lsb_release -cs) o 'bookworm'/'trixie' según versión
+#
+# Nota importante:
+#   Después de la instalación, es necesario cerrar sesión y volver a entrar
+#   para que los cambios de grupo surtan efecto.
+################################################################################
+
+# Añadir el repositorio oficial de Docker si no existe
+if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
+    # Eliminar clave GPG antigua si existe
+    [ -f /etc/apt/keyrings/docker.asc ] && sudo rm /etc/apt/keyrings/docker.asc
+    
+    # Crear directorio para claves GPG con permisos adecuados
+    sudo install -m 0755 -d /etc/apt/keyrings
+    
+    # Descargar la clave GPG oficial de Docker
+    # ADAPTACIÓN DEBIAN: Cambiar /ubuntu/ por /debian/
+    sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/ubuntu/gpg
+    
+    # Hacer la clave legible para todos los usuarios
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    
+    # Añadir el repositorio de Docker a las fuentes de APT
+    # $(dpkg --print-architecture): Detecta la arquitectura (amd64, arm64, etc.)
+    # $(. /etc/os-release && echo "$VERSION_CODENAME"): Obtiene el nombre de la versión (jammy, noble, etc.)
+    # ADAPTACIÓN DEBIAN: Cambiar /ubuntu/ por /debian/ y verificar VERSION_CODENAME
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+fi
+
+# Actualizar la lista de paquetes con el nuevo repositorio
+sudo apt update
+
+# Instalar Docker Engine y todos los plugins estándar
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+
+# Dar al usuario actual acceso privilegiado a Docker
+# Esto permite ejecutar comandos docker sin sudo
+# IMPORTANTE: Requiere cerrar sesión y volver a entrar para que surta efecto
+sudo usermod -aG docker ${USER}
+
+# Limitar el tamaño de los logs para evitar quedarse sin espacio en disco
+# Configuración:
+#   - log-driver: json-file (formato de logs)
+#   - max-size: 10m (máximo 10 megabytes por archivo de log)
+#   - max-file: 5 (mantener máximo 5 archivos de log rotados)
+# Total máximo de logs por contenedor: 50MB (10MB × 5 archivos)
+echo '{"log-driver":"json-file","log-opts":{"max-size":"10m","max-file":"5"}}' | sudo tee /etc/docker/daemon.json
+
+# Nota: Para aplicar la configuración de logs, reiniciar el servicio Docker:
+# sudo systemctl restart docker
