@@ -2,18 +2,18 @@
 
 ## 🔍 Estado de Independencia
 
-He analizado todos los archivos `.sh` en el directorio `devdeb` para verificar dependencias con Omakub.
+He analizado todos los archivos `.sh` en el directorio `devdeb` para verificar dependencias con DevDeb.
 
 ---
 
 ## ✅ Archivos Completamente Independientes
 
-Estos archivos **NO tienen dependencias** con Omakub y funcionan de forma autónoma:
+Estos archivos **NO tienen dependencias** con DevDeb y funcionan de forma autónoma:
 
 ### 1. **functions.sh** ✅
 - **Estado**: Completamente independiente
 - **Dependencias**: Ninguna
-- **Nota**: Referencia a Omakub eliminada del mensaje de error de Chrome
+- **Nota**: Referencia a DevDeb eliminada del mensaje de error de Chrome
 
 ### 2. **install-webapps.sh** ✅
 - **Estado**: Completamente independiente
@@ -23,22 +23,22 @@ Estos archivos **NO tienen dependencias** con Omakub y funcionan de forma autón
 ### 3. **check-version.sh** ✅
 - **Estado**: Independiente
 - **Dependencias**: Ninguna
-- **Nota**: Solo menciona Omakub en comentarios (documentación)
+- **Nota**: Solo menciona DevDeb en comentarios (documentación)
 
 ### 4. **identification.sh** ✅
 - **Estado**: Independiente
 - **Dependencias**: Requiere `gum` (instalable con apt)
-- **Variables**: Exporta `OMAKUB_USER_NAME` y `OMAKUB_USER_EMAIL` (nombres de variables, no dependencias)
+- **Variables**: Exporta `DEVDEB_USER_NAME` y `DEVDEB_USER_EMAIL` (nombres de variables, no dependencias)
 
 ### 5. **first-run-choices.sh** ✅
 - **Estado**: Independiente
 - **Dependencias**: Requiere `gum` (instalable con apt)
-- **Variables**: Exporta variables con prefijo OMAKUB_ (solo nombres, no dependencias)
+- **Variables**: Exporta variables con prefijo DEVDEB_ (solo nombres, no dependencias)
 
 ### 6. **select-dev-language.sh** ✅
 - **Estado**: Independiente
 - **Dependencias**: Requiere `mise` (instalable)
-- **Variables**: Lee `OMAKUB_FIRST_RUN_LANGUAGES` (solo nombre de variable)
+- **Variables**: Lee `DEVDEB_FIRST_RUN_LANGUAGES` (solo nombre de variable)
 
 ### 7. **docker.sh** ✅
 - **Estado**: Independiente
@@ -50,22 +50,22 @@ Estos archivos **NO tienen dependencias** con Omakub y funcionan de forma autón
 
 ---
 
-## ⚠️ Archivos con Referencias a Omakub (Solo Documentación)
+## ⚠️ Archivos con Referencias a DevDeb (Solo Documentación)
 
-Estos archivos mencionan Omakub en **comentarios de documentación**, pero no tienen dependencias funcionales:
+Estos archivos mencionan DevDeb en **comentarios de documentación**, pero no tienen dependencias funcionales:
 
 ### 1. **boot.sh**
 - **Referencias**: Solo en comentarios explicativos
-- **Funcionalidad**: Clona repositorio de Omakub (esto es intencional, es el instalador de Omakub)
+- **Funcionalidad**: Clona repositorio de DevDeb (esto es intencional, es el instalador de DevDeb)
 - **Uso en DevDeb**: No se usa directamente, es solo documentación
 
 ### 2. **install.sh**
 - **Referencias**: Solo en comentarios y rutas de source
-- **Funcionalidad**: Coordina instalación de Omakub
+- **Funcionalidad**: Coordina instalación de DevDeb
 - **Uso en DevDeb**: No se usa directamente, es solo documentación
 
 ### 3. **ascii.sh**
-- **Referencias**: Solo en comentarios (describe el logo de Omakub)
+- **Referencias**: Solo en comentarios (describe el logo de DevDeb)
 - **Funcionalidad**: Muestra logo ASCII
 - **Uso en DevDeb**: Independiente, solo muestra arte ASCII
 
@@ -73,31 +73,31 @@ Estos archivos mencionan Omakub en **comentarios de documentación**, pero no ti
 
 ## 🔧 Archivos que Requieren Archivos de Configuración
 
-Estos archivos necesitan archivos de configuración que están en Omakub. **Solución**: Usar el nuevo script independiente.
+Estos archivos necesitan archivos de configuración que están en DevDeb. **Solución**: Usar el nuevo script independiente.
 
 ### 1. **a-shell.sh** ⚠️
 **Dependencias**:
-- `~/.local/share/omakub/configs/bashrc`
-- `~/.local/share/omakub/defaults/bash/shell`
-- `~/.local/share/omakub/configs/inputrc`
+- `~/.local/share/devdeb/configs/bashrc`
+- `~/.local/share/devdeb/defaults/bash/shell`
+- `~/.local/share/devdeb/configs/inputrc`
 
 **Solución**:
-- Estos archivos se pueden copiar de Omakub una vez
+- Estos archivos se pueden copiar de DevDeb una vez
 - O crear versiones propias en `devdeb/configs/`
-- **Recomendación**: Documentar que este script requiere tener Omakub clonado, o crear configs propios
+- **Recomendación**: Documentar que este script requiere tener DevDeb clonado, o crear configs propios
 
 ### 2. **app-neovim.sh** ⚠️ (OBSOLETO - Usar install-neovim.sh)
 **Dependencias**:
-- `~/.local/share/omakub/configs/neovim/transparency.lua`
-- `~/.local/share/omakub/themes/tokyo-night/neovim.lua`
-- `~/.local/share/omakub/configs/neovim/snacks-animated-scrolling-off.lua`
-- `~/.local/share/omakub/configs/neovim/lazyvim.json`
-- `~/.local/share/omakub/applications/Neovim.sh`
+- `~/.local/share/devdeb/configs/neovim/transparency.lua`
+- `~/.local/share/devdeb/themes/tokyo-night/neovim.lua`
+- `~/.local/share/devdeb/configs/neovim/snacks-animated-scrolling-off.lua`
+- `~/.local/share/devdeb/configs/neovim/lazyvim.json`
+- `~/.local/share/devdeb/applications/Neovim.sh`
 
 **Solución**: ✅ **Usar `install-neovim.sh` en su lugar**
 - Script completamente independiente
 - Todos los archivos de configuración incluidos en `devdeb/configs/neovim/`
-- No requiere Omakub
+- No requiere DevDeb
 
 ### 3. **install-neovim.sh** ✅ **NUEVO - Completamente Independiente**
 **Ubicación**: `devdeb/install-neovim.sh`
@@ -105,7 +105,7 @@ Estos archivos necesitan archivos de configuración que están en Omakub. **Solu
 **Características**:
 - ✅ Instalación completa de Neovim + LazyVim
 - ✅ Todos los archivos de configuración incluidos
-- ✅ No requiere Omakub
+- ✅ No requiere DevDeb
 - ✅ Configuraciones en `devdeb/configs/neovim/`:
   - `transparency.lua` - Transparencia
   - `theme-tokyonight.lua` - Tema Tokyo Night
@@ -135,8 +135,8 @@ cd ~/Workspace/Repositorios/Instalación/devdeb
 | docker.sh | ✅ Independiente | Ninguna | ✅ Completado |
 | mise.sh | ✅ Independiente | Ninguna | ✅ Completado |
 | ascii.sh | ✅ Independiente | Ninguna | ✅ Completado |
-| boot.sh | 📝 Documentación | Omakub (intencional) | N/A (es instalador de Omakub) |
-| install.sh | 📝 Documentación | Omakub (intencional) | N/A (es instalador de Omakub) |
+| boot.sh | 📝 Documentación | DevDeb (intencional) | N/A (es instalador de DevDeb) |
+| install.sh | 📝 Documentación | DevDeb (intencional) | N/A (es instalador de DevDeb) |
 | a-shell.sh | ⚠️ Configs | Archivos de config | Crear configs locales |
 | app-neovim.sh | ⚠️ Configs | Archivos de config | Crear configs locales |
 
@@ -144,7 +144,7 @@ cd ~/Workspace/Repositorios/Instalación/devdeb
 
 ## 🎯 Archivos Principales para Uso Independiente
 
-Si quieres usar DevDeb **sin tener Omakub instalado**, estos son los archivos que funcionan completamente solos:
+Si quieres usar DevDeb **sin tener DevDeb instalado**, estos son los archivos que funcionan completamente solos:
 
 ### ✅ Listos para Usar
 
@@ -166,7 +166,7 @@ Si quieres usar DevDeb **sin tener Omakub instalado**, estos son los archivos qu
 
 ## 💡 Recomendaciones
 
-### Para Uso Inmediato (Sin Omakub)
+### Para Uso Inmediato (Sin DevDeb)
 
 **Usa estos archivos**:
 ```bash
@@ -185,9 +185,9 @@ source ~/Workspace/Repositorios/Instalación/devdeb/functions.sh
 
 ### Para Configuración Completa
 
-**Opción 1**: Clonar Omakub una vez para obtener configs
+**Opción 1**: Clonar DevDeb una vez para obtener configs
 ```bash
-git clone https://github.com/basecamp/omakub.git ~/.local/share/omakub
+git clone https://github.com/basecamp/devdeb.git ~/.local/share/devdeb
 # Luego usar a-shell.sh y app-neovim.sh
 ```
 
@@ -200,16 +200,16 @@ mkdir -p ~/Workspace/Repositorios/Instalación/devdeb/themes/tokyo-night
 
 ---
 
-## 🔄 Variables de Entorno con Prefijo OMAKUB_
+## 🔄 Variables de Entorno con Prefijo DEVDEB_
 
-Algunos scripts usan variables con prefijo `OMAKUB_`:
-- `OMAKUB_USER_NAME`
-- `OMAKUB_USER_EMAIL`
-- `OMAKUB_FIRST_RUN_LANGUAGES`
-- `OMAKUB_FIRST_RUN_DBS`
-- `OMAKUB_FIRST_RUN_OPTIONAL_APPS`
+Algunos scripts usan variables con prefijo `DEVDEB_`:
+- `DEVDEB_USER_NAME`
+- `DEVDEB_USER_EMAIL`
+- `DEVDEB_FIRST_RUN_LANGUAGES`
+- `DEVDEB_FIRST_RUN_DBS`
+- `DEVDEB_FIRST_RUN_OPTIONAL_APPS`
 
-**Nota**: Estos son solo **nombres de variables**, no dependencias de Omakub. Puedes:
+**Nota**: Estos son solo **nombres de variables**, no dependencias de DevDeb. Puedes:
 1. Mantener los nombres (compatibilidad)
 2. Cambiarlos a `DEVDEB_*` si prefieres
 
@@ -220,25 +220,25 @@ Algunos scripts usan variables con prefijo `OMAKUB_`:
 **Estado General**: **90% Independiente** ✅
 
 - **8 de 13 archivos** son completamente independientes
-- **2 archivos** son documentación de Omakub (intencional)
+- **2 archivos** son documentación de DevDeb (intencional)
 - **2 archivos** requieren archivos de configuración (fácil de resolver)
 - **1 archivo** (functions.sh) ya está 100% independiente
 
 **Para uso de webapps** (el caso de uso principal): **100% Independiente** ✅
 
-Los archivos críticos (`functions.sh` e `install-webapps.sh`) no tienen ninguna dependencia con Omakub y funcionan perfectamente de forma autónoma.
+Los archivos críticos (`functions.sh` e `install-webapps.sh`) no tienen ninguna dependencia con DevDeb y funcionan perfectamente de forma autónoma.
 
 ---
 
 ## 📝 Próximos Pasos Opcionales
 
-Si quieres hacer DevDeb **100% independiente** de Omakub:
+Si quieres hacer DevDeb **100% independiente** de DevDeb:
 
 1. ✅ **Completado**: `functions.sh` - Sin dependencias
 2. ✅ **Completado**: `install-webapps.sh` - Sin dependencias
 3. ⏭️ **Opcional**: Crear `devdeb/configs/bashrc` personalizado
 4. ⏭️ **Opcional**: Crear `devdeb/configs/inputrc` personalizado
 5. ⏭️ **Opcional**: Crear configs de Neovim en `devdeb/configs/neovim/`
-6. ⏭️ **Opcional**: Renombrar variables `OMAKUB_*` a `DEVDEB_*`
+6. ⏭️ **Opcional**: Renombrar variables `DEVDEB_*` a `DEVDEB_*`
 
-**Recomendación**: Los pasos 1 y 2 (completados) son suficientes para el 90% de los casos de uso. Los pasos 3-6 son opcionales y solo necesarios si quieres configuración completa de shell y Neovim sin tener Omakub.
+**Recomendación**: Los pasos 1 y 2 (completados) son suficientes para el 90% de los casos de uso. Los pasos 3-6 son opcionales y solo necesarios si quieres configuración completa de shell y Neovim sin tener DevDeb.

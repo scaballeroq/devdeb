@@ -93,9 +93,9 @@ Los scripts **NO usan**:
 
 ```bash
 # Copia configuraciones de Bash
-cp ~/.local/share/omakub/configs/bashrc ~/.bashrc
-cp ~/.local/share/omakub/configs/inputrc ~/.inputrc
-source ~/.local/share/omakub/defaults/bash/shell
+cp ~/.local/share/devdeb/configs/bashrc ~/.bashrc
+cp ~/.local/share/devdeb/configs/inputrc ~/.inputrc
+source ~/.local/share/devdeb/defaults/bash/shell
 ```
 
 ### Solución

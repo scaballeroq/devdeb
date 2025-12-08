@@ -1,10 +1,10 @@
 #!/bin/bash
 
 ################################################################################
-# INSTALL.SH - Script Principal de Instalación de Omakub
+# INSTALL.SH - Script Principal de Instalación de DevDeb
 ################################################################################
 # Descripción:
-#   Este es el script principal que coordina toda la instalación de Omakub.
+#   Este es el script principal que coordina toda la instalación de DevDeb.
 #   Se ejecuta después de boot.sh y maneja la instalación de componentes
 #   tanto de terminal como de escritorio.
 #
@@ -40,24 +40,24 @@ set -e
 
 # Configurar trap para capturar errores y dar oportunidad de reintentar
 # Si algo falla, muestra este mensaje con instrucciones de reintento
-trap 'echo "Omakub installation failed! You can retry by running: source ~/.local/share/omakub/install.sh"' ERR
+trap 'echo "DevDeb installation failed! You can retry by running: source ~/.local/share/devdeb/install.sh"' ERR
 
 # Verificar la distribución y versión del sistema operativo
 # Este script abortará si no es Ubuntu 24.04+ (adaptar para Debian)
-source ~/.local/share/omakub/install/check-version.sh
+source ~/.local/share/devdeb/install/check-version.sh
 
 # Solicitar al usuario que elija aplicaciones y configuraciones
 echo "Get ready to make a few choices..."
 
 # Instalar 'gum' - herramienta para crear interfaces de usuario en terminal
 # Se instala primero porque se usa en los siguientes scripts
-source ~/.local/share/omakub/install/terminal/required/app-gum.sh >/dev/null
+source ~/.local/share/devdeb/install/terminal/required/app-gum.sh >/dev/null
 
 # Solicitar elección de aplicaciones opcionales, lenguajes y bases de datos
-source ~/.local/share/omakub/install/first-run-choices.sh
+source ~/.local/share/devdeb/install/first-run-choices.sh
 
 # Solicitar nombre y email del usuario (para configuración de git)
-source ~/.local/share/omakub/install/identification.sh
+source ~/.local/share/devdeb/install/identification.sh
 
 # Las aplicaciones de escritorio y ajustes solo se instalan si estamos en GNOME
 if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]]; then
@@ -69,10 +69,10 @@ if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]]; then
   echo "Installing terminal and desktop tools..."
 
   # Instalar herramientas de terminal (shell, docker, editores, etc.)
-  source ~/.local/share/omakub/install/terminal.sh
+  source ~/.local/share/devdeb/install/terminal.sh
 
   # Instalar herramientas de escritorio (aplicaciones GUI, temas, extensiones)
-  source ~/.local/share/omakub/install/desktop.sh
+  source ~/.local/share/devdeb/install/desktop.sh
 
   # Revertir a la configuración normal de suspensión y bloqueo
   # Bloqueo activado después de 5 minutos (300 segundos) de inactividad
@@ -82,5 +82,5 @@ else
   # Si no estamos en GNOME, solo instalar herramientas de terminal
   # Esto es útil para servidores o sistemas con otros entornos de escritorio
   echo "Only installing terminal tools..."
-  source ~/.local/share/omakub/install/terminal.sh
+  source ~/.local/share/devdeb/install/terminal.sh
 fi

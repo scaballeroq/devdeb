@@ -2,7 +2,7 @@
 
 ## 📋 Descripción
 
-Esta guía explica cómo usar el script de instalación independiente de Neovim + LazyVim que NO requiere tener Omakub instalado.
+Esta guía explica cómo usar el script de instalación independiente de Neovim + LazyVim que NO requiere tener DevDeb instalado.
 
 ---
 

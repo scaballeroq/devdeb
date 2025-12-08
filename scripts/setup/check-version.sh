@@ -5,7 +5,7 @@
 ################################################################################
 # Descripción:
 #   Este script verifica que el sistema cumple con los requisitos mínimos
-#   para ejecutar Omakub. Comprueba la distribución, versión y arquitectura.
+#   para ejecutar DevDeb. Comprueba la distribución, versión y arquitectura.
 #
 # Verificaciones realizadas:
 #   1. Existencia del archivo /etc/os-release

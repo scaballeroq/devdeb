@@ -1,8 +1,8 @@
-# Guía de Adaptación de Omakub para Debian 13 Trixie
+# Guía de Adaptación de DevDeb para Debian 13 Trixie
 
 ## 🎯 Objetivo
 
-Esta guía explica cómo adaptar los scripts de Omakub (diseñados para Ubuntu 24.04+) para que funcionen correctamente en Debian 13 (Trixie).
+Esta guía explica cómo adaptar los scripts de DevDeb (diseñados para Ubuntu 24.04+) para que funcionen correctamente en Debian 13 (Trixie).
 
 ---
 
@@ -382,7 +382,7 @@ gnome-shell --version
 
 ## ✅ Resumen de Cambios Mínimos
 
-Para hacer funcionar Omakub en Debian 13 Trixie, los cambios **mínimos esenciales** son:
+Para hacer funcionar DevDeb en Debian 13 Trixie, los cambios **mínimos esenciales** son:
 
 1. **check-version.sh**: Cambiar verificación de Ubuntu a Debian
 2. **docker.sh**: Cambiar URLs de repositorio a versión Debian

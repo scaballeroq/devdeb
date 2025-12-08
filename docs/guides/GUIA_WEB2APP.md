@@ -2,7 +2,7 @@
 
 ## 📱 ¿Qué es web2app?
 
-`web2app` es una función de Bash incluida en Omakub que convierte cualquier sitio web en una aplicación de escritorio independiente. La webapp se abre en una ventana de Chrome dedicada, sin barras de navegación, como si fuera una aplicación nativa.
+`web2app` es una función de Bash incluida en DevDeb que convierte cualquier sitio web en una aplicación de escritorio independiente. La webapp se abre en una ventana de Chrome dedicada, sin barras de navegación, como si fuera una aplicación nativa.
 
 ---
 
@@ -26,19 +26,19 @@
 which google-chrome
 
 # Si no está instalado, instalarlo
-source ~/.local/share/omakub/install/desktop/app-chrome.sh
+source ~/.local/share/devdeb/install/desktop/app-chrome.sh
 ```
 
 ### 2. Función web2app Disponible
 
-La función debe estar cargada en tu shell. Esto se hace automáticamente si has instalado Omakub, pero puedes verificarlo:
+La función debe estar cargada en tu shell. Esto se hace automáticamente si has instalado DevDeb, pero puedes verificarlo:
 
 ```bash
 # Verificar que la función existe
 type web2app
 
 # Si no existe, cargarla manualmente
-source ~/.local/share/omakub/defaults/bash/functions
+source ~/.local/share/devdeb/defaults/bash/functions
 ```
 
 ---
@@ -168,7 +168,7 @@ Primero, asegúrate de que existe una carpeta "WebApps" en GNOME:
 gsettings get org.gnome.desktop.app-folders folder-children
 
 # Si no existe "WebApps", puedes crearla manualmente en GNOME
-# o usar el script de Omakub que la crea automáticamente
+# o usar el script de DevDeb que la crea automáticamente
 ```
 
 ### Añadir WebApp a Carpeta
@@ -275,8 +275,8 @@ Crea un script para instalar todas tus webapps favoritas:
 #!/bin/bash
 # install-my-webapps.sh
 
-# Cargar funciones de Omakub
-source ~/.local/share/omakub/defaults/bash/functions
+# Cargar funciones de DevDeb
+source ~/.local/share/devdeb/defaults/bash/functions
 
 # Google Apps
 web2app 'Gmail' https://mail.google.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/gmail.png
@@ -356,13 +356,13 @@ web2app 'Reddit' https://reddit.com/ https://cdn.jsdelivr.net/gh/homarr-labs/das
 **Solución**: Cargar las funciones manualmente
 
 ```bash
-source ~/.local/share/omakub/defaults/bash/functions
+source ~/.local/share/devdeb/defaults/bash/functions
 ```
 
 O añadir a tu `~/.bashrc`:
 
 ```bash
-echo 'source ~/.local/share/omakub/defaults/bash/functions' >> ~/.bashrc
+echo 'source ~/.local/share/devdeb/defaults/bash/functions' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -394,7 +394,7 @@ update-desktop-database ~/.local/share/applications/
 **Solución**: Instalar Chrome
 
 ```bash
-source ~/.local/share/omakub/install/desktop/app-chrome.sh
+source ~/.local/share/devdeb/install/desktop/app-chrome.sh
 ```
 
 ---
@@ -474,7 +474,7 @@ nano ~/.local/share/applications/'Gmail.desktop'
 
 ```bash
 # 1. Asegurarse de que las funciones están cargadas
-source ~/.local/share/omakub/defaults/bash/functions
+source ~/.local/share/devdeb/defaults/bash/functions
 
 # 2. Crear la webapp
 web2app 'Notion' https://notion.so/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/notion.png

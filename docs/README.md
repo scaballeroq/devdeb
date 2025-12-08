@@ -2,7 +2,7 @@
 
 ## 📋 Descripción
 
-DevDeb es un sistema de instalación y configuración automática para convertir una instalación fresca de **Debian 13 (Trixie)** en un entorno de desarrollo completo, moderno y hermoso. Está basado en **Omakub** (para Ubuntu) y adaptado específicamente para Debian.
+DevDeb es un sistema de instalación y configuración automática para convertir una instalación fresca de **Debian 13 (Trixie)** en un entorno de desarrollo completo, moderno y hermoso. Está basado en **DevDeb** (para Ubuntu) y adaptado específicamente para Debian.
 
 Este proyecto instala y configura:
 - 🖥️ **Herramientas de terminal** (shell, editores, utilidades)
@@ -29,7 +29,7 @@ wget -qO- https://raw.githubusercontent.com/TU_USUARIO/devdeb/main/boot.sh | bas
 Este comando:
 1. Actualiza el sistema
 2. Instala git
-3. Clona el repositorio en `~/.local/share/omakub`
+3. Clona el repositorio en `~/.local/share/devdeb`
 4. Ejecuta el instalador principal
 5. Te pedirá elegir aplicaciones, lenguajes y bases de datos
 
@@ -39,11 +39,11 @@ Este comando:
 
 #### `boot.sh`
 Script de arranque inicial que:
-- Muestra el logo ASCII de Omakub
+- Muestra el logo ASCII de DevDeb
 - Verifica que sea una instalación de Ubuntu 24.04+ (adaptar para Debian)
 - Actualiza repositorios APT
 - Instala git
-- Clona el repositorio de Omakub
+- Clona el repositorio de DevDeb
 - Inicia la instalación principal
 
 #### `install.sh`
@@ -57,7 +57,7 @@ Script principal de instalación que:
 - Configura opciones de suspensión durante la instalación
 
 #### `ascii.sh`
-Muestra el logo de Omakub con degradado de colores (cyan a azul)
+Muestra el logo de DevDeb con degradado de colores (cyan a azul)
 
 ### 🔹 Herramientas de Terminal
 
@@ -67,7 +67,7 @@ Ubicación: `install/terminal/`
 
 **`a-shell.sh`** - Configura Bash
 - Respalda `.bashrc` existente
-- Copia configuración de Omakub
+- Copia configuración de DevDeb
 - Configura `.inputrc` para mejor autocompletado
 
 **`libraries.sh`** - Instala librerías de desarrollo
@@ -268,16 +268,16 @@ Ubicación: `install/desktop/optional/`
 
 Ubicación: `bin/`
 
-#### `omakub`
+#### `devdeb`
 Comando principal que abre un menú interactivo con opciones:
 - **Theme**: Cambiar tema de colores
 - **Font**: Cambiar fuente de terminal
-- **Update**: Actualizar Omakub
+- **Update**: Actualizar DevDeb
 - **Install**: Instalar componentes adicionales
 - **Uninstall**: Desinstalar componentes
 - **Manual**: Ver manual de uso
 
-#### Subcomandos (`bin/omakub-sub/`)
+#### Subcomandos (`bin/devdeb-sub/`)
 
 **`theme.sh`** - Cambiar tema
 - Tokyo Night
@@ -294,7 +294,7 @@ Comando principal que abre un menú interactivo con opciones:
 **`font-size.sh`** - Cambiar tamaño de fuente
 
 **`update.sh`** - Actualizar sistema
-- Actualiza Omakub desde repositorio
+- Actualiza DevDeb desde repositorio
 - Ejecuta migraciones si es necesario
 
 **`install.sh`** - Instalador de componentes
@@ -344,29 +344,29 @@ Ubicación: `configs/`
 ### Solo Herramientas de Terminal
 
 ```bash
-source ~/.local/share/omakub/install/terminal.sh
+source ~/.local/share/devdeb/install/terminal.sh
 ```
 
 ### Solo Aplicaciones de Escritorio
 
 ```bash
-source ~/.local/share/omakub/install/desktop.sh
+source ~/.local/share/devdeb/install/desktop.sh
 ```
 
 ### Componentes Individuales
 
 ```bash
 # Instalar solo Docker
-source ~/.local/share/omakub/install/terminal/docker.sh
+source ~/.local/share/devdeb/install/terminal/docker.sh
 
 # Instalar solo Neovim
-source ~/.local/share/omakub/install/terminal/app-neovim.sh
+source ~/.local/share/devdeb/install/terminal/app-neovim.sh
 
 # Instalar solo VSCode
-source ~/.local/share/omakub/install/desktop/app-vscode.sh
+source ~/.local/share/devdeb/install/desktop/app-vscode.sh
 
 # Instalar solo Chrome
-source ~/.local/share/omakub/install/desktop/app-chrome.sh
+source ~/.local/share/devdeb/install/desktop/app-chrome.sh
 ```
 
 ### Instalar Lenguaje Específico
@@ -401,23 +401,23 @@ docker run -d --name redis -p 6379:6379 redis:latest
 
 ## 🛠️ Comandos Útiles
 
-### Gestión de Omakub
+### Gestión de DevDeb
 
 ```bash
 # Abrir menú principal
-omakub
+devdeb
 
 # Cambiar tema
-omakub theme
+devdeb theme
 
 # Cambiar fuente
-omakub font
+devdeb font
 
-# Actualizar Omakub
-omakub update
+# Actualizar DevDeb
+devdeb update
 
 # Ver manual
-omakub manual
+devdeb manual
 ```
 
 ### Gestión de Versiones con Mise
@@ -467,7 +467,7 @@ gh issue list
 
 El script original verifica Ubuntu 24.04+. Para Debian, edita:
 ```bash
-nano ~/.local/share/omakub/install/check-version.sh
+nano ~/.local/share/devdeb/install/check-version.sh
 ```
 
 Cambia la verificación de Ubuntu a Debian:
@@ -499,7 +499,7 @@ apt show nombre_paquete
 rm -rf ~/.config/nombre_app
 
 # Volver a ejecutar instalador
-source ~/.local/share/omakub/install/terminal/app-nombre.sh
+source ~/.local/share/devdeb/install/terminal/app-nombre.sh
 ```
 
 ### Revertir configuración de shell
@@ -607,7 +607,6 @@ devdeb/
 │   │   ├── DOCUMENTACION_FUNCTIONS.md
 │   │   └── ANALISIS_DEPENDENCIAS.md
 │   └── technical/        # Documentación técnica
-│       ├── ANALISIS_OMARCHY.md
 │       ├── COMPATIBILIDAD_ZSH.md
 │       ├── COMPATIBILIDAD_MISE.md
 │       ├── MISE_ZSH.md
@@ -630,12 +629,12 @@ Para adaptar más scripts a Debian:
 
 ## 📄 Licencia
 
-Basado en Omakub, licenciado bajo MIT License.
+Basado en DevDeb, licenciado bajo MIT License.
 
 ## 🔗 Enlaces Útiles
 
-- **Omakub Original**: https://omakub.org
-- **Repositorio Omakub**: https://github.com/basecamp/omakub
+- **DevDeb Original**: https://devdeb.org
+- **Repositorio DevDeb**: https://github.com/basecamp/devdeb
 - **Mise**: https://mise.jdx.dev/
 - **LazyVim**: https://www.lazyvim.org/
 - **Alacritty**: https://alacritty.org/

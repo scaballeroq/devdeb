@@ -1,8 +1,8 @@
-# Cambios de Nomenclatura: OMAKUB → DEVDEB
+# Cambios de Nomenclatura: DEVDEB → DEVDEB
 
 ## 📝 Resumen
 
-Se han reemplazado todas las referencias a variables de entorno con prefijo `OMAKUB_` por `DEVDEB_` en todos los scripts de devdeb.
+Se han reemplazado todas las referencias a variables de entorno con prefijo `DEVDEB_` por `DEVDEB_` en todos los scripts de devdeb.
 
 ---
 
@@ -12,8 +12,8 @@ Se han reemplazado todas las referencias a variables de entorno con prefijo `OMA
 
 | Antes | Después |
 |-------|---------|
-| `OMAKUB_USER_NAME` | `DEVDEB_USER_NAME` |
-| `OMAKUB_USER_EMAIL` | `DEVDEB_USER_EMAIL` |
+| `DEVDEB_USER_NAME` | `DEVDEB_USER_NAME` |
+| `DEVDEB_USER_EMAIL` | `DEVDEB_USER_EMAIL` |
 
 **Uso**: Almacenan el nombre y email del usuario para configuración de Git.
 
@@ -25,9 +25,9 @@ Se han reemplazado todas las referencias a variables de entorno con prefijo `OMA
 
 | Antes | Después |
 |-------|---------|
-| `OMAKUB_FIRST_RUN_OPTIONAL_APPS` | `DEVDEB_FIRST_RUN_OPTIONAL_APPS` |
-| `OMAKUB_FIRST_RUN_LANGUAGES` | `DEVDEB_FIRST_RUN_LANGUAGES` |
-| `OMAKUB_FIRST_RUN_DBS` | `DEVDEB_FIRST_RUN_DBS` |
+| `DEVDEB_FIRST_RUN_OPTIONAL_APPS` | `DEVDEB_FIRST_RUN_OPTIONAL_APPS` |
+| `DEVDEB_FIRST_RUN_LANGUAGES` | `DEVDEB_FIRST_RUN_LANGUAGES` |
+| `DEVDEB_FIRST_RUN_DBS` | `DEVDEB_FIRST_RUN_DBS` |
 
 **Uso**: Almacenan las selecciones del usuario durante la instalación inicial.
 
@@ -42,7 +42,7 @@ Se han reemplazado todas las referencias a variables de entorno con prefijo `OMA
 
 | Antes | Después |
 |-------|---------|
-| `OMAKUB_REF` | `DEVDEB_REF` |
+| `DEVDEB_REF` | `DEVDEB_REF` |
 
 **Uso**: Especifica la rama o tag del repositorio a usar.
 
@@ -60,8 +60,8 @@ Se han reemplazado todas las referencias a variables de entorno con prefijo `OMA
 
 ```bash
 # Antes
-if [[ -v OMAKUB_FIRST_RUN_LANGUAGES ]]; then
-  languages=$OMAKUB_FIRST_RUN_LANGUAGES
+if [[ -v DEVDEB_FIRST_RUN_LANGUAGES ]]; then
+  languages=$DEVDEB_FIRST_RUN_LANGUAGES
 
 # Después
 if [[ -v DEVDEB_FIRST_RUN_LANGUAGES ]]; then
@@ -77,8 +77,8 @@ if [[ -v DEVDEB_FIRST_RUN_LANGUAGES ]]; then
 
 ```bash
 # Antes
-export OMAKUB_USER_NAME=$(gum input ...)
-export OMAKUB_USER_EMAIL=$(gum input ...)
+export DEVDEB_USER_NAME=$(gum input ...)
+export DEVDEB_USER_EMAIL=$(gum input ...)
 
 # Después
 export DEVDEB_USER_NAME=$(gum input ...)
@@ -94,9 +94,9 @@ export DEVDEB_USER_EMAIL=$(gum input ...)
 
 ```bash
 # Antes
-export OMAKUB_FIRST_RUN_OPTIONAL_APPS=$(gum choose ...)
-export OMAKUB_FIRST_RUN_LANGUAGES=$(gum choose ...)
-export OMAKUB_FIRST_RUN_DBS=$(gum choose ...)
+export DEVDEB_FIRST_RUN_OPTIONAL_APPS=$(gum choose ...)
+export DEVDEB_FIRST_RUN_LANGUAGES=$(gum choose ...)
+export DEVDEB_FIRST_RUN_DBS=$(gum choose ...)
 
 # Después
 export DEVDEB_FIRST_RUN_OPTIONAL_APPS=$(gum choose ...)
@@ -112,11 +112,11 @@ export DEVDEB_FIRST_RUN_DBS=$(gum choose ...)
 
 ```bash
 # Antes
-#   OMAKUB_FIRST_RUN_OPTIONAL_APPS: Apps opcionales seleccionadas
-#   OMAKUB_FIRST_RUN_LANGUAGES: Lenguajes de programación seleccionados
-#   OMAKUB_FIRST_RUN_DBS: Bases de datos seleccionadas
-#   OMAKUB_USER_NAME: Nombre completo del usuario
-#   OMAKUB_USER_EMAIL: Email del usuario
+#   DEVDEB_FIRST_RUN_OPTIONAL_APPS: Apps opcionales seleccionadas
+#   DEVDEB_FIRST_RUN_LANGUAGES: Lenguajes de programación seleccionados
+#   DEVDEB_FIRST_RUN_DBS: Bases de datos seleccionadas
+#   DEVDEB_USER_NAME: Nombre completo del usuario
+#   DEVDEB_USER_EMAIL: Email del usuario
 
 # Después
 #   DEVDEB_FIRST_RUN_OPTIONAL_APPS: Apps opcionales seleccionadas
@@ -135,8 +135,8 @@ export DEVDEB_FIRST_RUN_DBS=$(gum choose ...)
 
 ```bash
 # Antes
-if [[ $OMAKUB_REF != "master" ]]; then
-  git fetch origin "${OMAKUB_REF:-stable}" && git checkout "${OMAKUB_REF:-stable}"
+if [[ $DEVDEB_REF != "master" ]]; then
+  git fetch origin "${DEVDEB_REF:-stable}" && git checkout "${DEVDEB_REF:-stable}"
 
 # Después
 if [[ $DEVDEB_REF != "master" ]]; then
@@ -160,14 +160,14 @@ if [[ $DEVDEB_REF != "master" ]]; then
 
 ## ✅ Verificación
 
-### Comprobar que no quedan referencias a OMAKUB
+### Comprobar que no quedan referencias a DEVDEB
 
 ```bash
 cd ~/Workspace/Repositorios/Instalación/devdeb
-grep -r "OMAKUB" *.sh
+grep -r "DEVDEB" *.sh
 
 # No debería devolver resultados en variables
-# Solo puede aparecer en comentarios que hablen de Omakub como proyecto
+# Solo puede aparecer en comentarios que hablen de DevDeb como proyecto
 ```
 
 ### Verificar nuevas variables DEVDEB
@@ -184,29 +184,29 @@ grep -r "DEVDEB" *.sh
 
 ### Compatibilidad
 
-**⚠️ IMPORTANTE**: Este cambio **NO es compatible** con scripts que esperen variables `OMAKUB_*`.
+**⚠️ IMPORTANTE**: Este cambio **NO es compatible** con scripts que esperen variables `DEVDEB_*`.
 
 Si tienes scripts personalizados que usan las variables antiguas, deberás actualizarlos.
 
 ### Migración
 
-Si estás migrando de Omakub a DevDeb:
+Si estás migrando de DevDeb a DevDeb:
 
 ```bash
 # Opción 1: Crear aliases temporales
-export OMAKUB_USER_NAME="$DEVDEB_USER_NAME"
-export OMAKUB_USER_EMAIL="$DEVDEB_USER_EMAIL"
+export DEVDEB_USER_NAME="$DEVDEB_USER_NAME"
+export DEVDEB_USER_EMAIL="$DEVDEB_USER_EMAIL"
 # etc...
 
 # Opción 2: Actualizar tus scripts para usar DEVDEB_*
-sed -i 's/OMAKUB_/DEVDEB_/g' tus_scripts.sh
+sed -i 's/DEVDEB_/DEVDEB_/g' tus_scripts.sh
 ```
 
 ---
 
 ## 💡 Razón del Cambio
 
-Este cambio hace que DevDeb sea **completamente independiente** de Omakub en:
+Este cambio hace que DevDeb sea **completamente independiente** de DevDeb en:
 
 1. ✅ **Nomenclatura** - Variables propias
 2. ✅ **Funcionalidad** - Scripts independientes
@@ -253,6 +253,6 @@ DEVDEB_REF=v1.0.0 ./boot.sh
 
 **Estado**: ✅ Completado
 
-Todas las referencias a `OMAKUB_*` han sido reemplazadas por `DEVDEB_*` en los archivos `.sh` de devdeb.
+Todas las referencias a `DEVDEB_*` han sido reemplazadas por `DEVDEB_*` en los archivos `.sh` de devdeb.
 
-El proyecto DevDeb ahora tiene su propia identidad de variables de entorno, completamente separada de Omakub.
+El proyecto DevDeb ahora tiene su propia identidad de variables de entorno, completamente separada de DevDeb.

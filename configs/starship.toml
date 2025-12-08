@@ -1,5 +1,4 @@
 # Configuración de Starship para DevDeb
-# Basado en la configuración de Omarchy, adaptado para DevDeb
 
 # Añadir línea en blanco antes del prompt
 add_newline = true

@@ -1,5 +1,5 @@
 # Configuración de Zsh para DevDeb
-# Basado en mejores prácticas y componentes de Omarchy
+# Basado en mejores prácticas y componentes de 
 
 # Si no es interactivo, no hacer nada
 [[ $- != *i* ]] && return

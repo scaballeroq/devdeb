@@ -4,7 +4,7 @@
 # ASCII.SH - Generador de Logo ASCII con Degradado de Colores
 ################################################################################
 # Descripción:
-#   Este script muestra el logo de Omakub en arte ASCII con un degradado
+#   Este script muestra el logo de DevDeb en arte ASCII con un degradado
 #   de colores que va desde cyan hasta azul.
 #
 # Funcionalidad:
@@ -28,7 +28,7 @@
 #   45 - Azul real
 ################################################################################
 
-# Arte ASCII del logo de Omakub
+# Arte ASCII del logo de DevDeb
 ascii_art='
 ________                  __        ___.
 \_____  \   _____ _____  |  | ____ _\_ |__

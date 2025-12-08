@@ -10,7 +10,7 @@ El archivo `functions.sh` contiene todas las funciones de Bash necesarias para e
 
 ## 🎯 Propósito
 
-Este archivo proporciona funciones independientes que NO requieren tener Omakub instalado. Es una versión adaptada y documentada de las funciones de Omakub, lista para usar en Debian.
+Este archivo proporciona funciones independientes que NO requieren tener DevDeb instalado. Es una versión adaptada y documentada de las funciones de DevDeb, lista para usar en Debian.
 
 ---
 

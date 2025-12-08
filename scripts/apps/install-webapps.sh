@@ -5,7 +5,7 @@
 ################################################################################
 # Descripción:
 #   Este script instala un conjunto de webapps populares usando la función
-#   web2app de Omakub. Puedes personalizar qué apps instalar comentando
+#   web2app de DevDeb. Puedes personalizar qué apps instalar comentando
 #   o descomentando las líneas correspondientes.
 #
 # Uso:

@@ -82,14 +82,14 @@ if [ ! -d "$HOME/.config/nvim" ]; then
   # Configurar transparencia para que coincida con el terminal
   # Esto hace que el fondo de Neovim sea transparente
   mkdir -p ~/.config/nvim/plugin/after
-  cp ~/.local/share/omakub/configs/neovim/transparency.lua ~/.config/nvim/plugin/after/
+  cp ~/.local/share/devdeb/configs/neovim/transparency.lua ~/.config/nvim/plugin/after/
 
   # Establecer Tokyo Night como tema por defecto
   # Tokyo Night es un tema oscuro popular con buen contraste
-  cp ~/.local/share/omakub/themes/tokyo-night/neovim.lua ~/.config/nvim/lua/plugins/theme.lua
+  cp ~/.local/share/devdeb/themes/tokyo-night/neovim.lua ~/.config/nvim/lua/plugins/theme.lua
 
   # Desactivar el scroll animado (puede ser molesto para algunos usuarios)
-  cp ~/.local/share/omakub/configs/neovim/snacks-animated-scrolling-off.lua ~/.config/nvim/lua/plugins/
+  cp ~/.local/share/devdeb/configs/neovim/snacks-animated-scrolling-off.lua ~/.config/nvim/lua/plugins/
 
   # Desactivar números de línea relativos
   # Los números relativos muestran distancias desde la línea actual
@@ -97,7 +97,7 @@ if [ ! -d "$HOME/.config/nvim" ]; then
   echo "vim.opt.relativenumber = false" >>~/.config/nvim/lua/config/options.lua
 
   # Asegurar que neo-tree (explorador de archivos) se use por defecto
-  cp ~/.local/share/omakub/configs/neovim/lazyvim.json ~/.config/nvim/
+  cp ~/.local/share/devdeb/configs/neovim/lazyvim.json ~/.config/nvim/
 fi
 
 # Reemplazar el lanzador de escritorio para que Neovim se abra dentro de Alacritty
@@ -108,7 +108,7 @@ if [[ -d ~/.local/share/applications ]]; then
   sudo rm -rf /usr/local/share/applications/nvim.desktop
   
   # Crear lanzador personalizado que abre Neovim en Alacritty
-  source ~/.local/share/omakub/applications/Neovim.sh
+  source ~/.local/share/devdeb/applications/Neovim.sh
 fi
 
 # Al primer inicio, LazyVim descargará e instalará automáticamente todos los plugins

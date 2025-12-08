@@ -23,7 +23,7 @@
 #   - webm2mp4: Convertir videos webm a mp4
 #   - iso2sd: Escribir ISO a tarjeta SD
 #
-# Autor: Basado en Omakub, adaptado para DevDeb
+# Autor:
 ################################################################################
 
 ################################################################################

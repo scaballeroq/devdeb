@@ -1,6 +1,6 @@
 # DevDeb - Índice de Documentación
 
-Bienvenido al proyecto **DevDeb**, una adaptación de Omakub para Debian 13 Trixie.
+Bienvenido al proyecto **DevDeb**, una adaptación de DevDeb para Debian 13 Trixie.
 
 ## 📚 Documentación Disponible
 
@@ -64,12 +64,7 @@ Bienvenido al proyecto **DevDeb**, una adaptación de Omakub para Debian 13 Trix
    - Ejemplos de uso
    - **Lectura estimada**: 15-20 minutos
 
-9. **[ANALISIS_OMARCHY.md](ANALISIS_OMARCHY.md)** - Componentes de Omarchy
-   - Análisis de componentes útiles
-   - Adaptación para DevDeb
-   - **Lectura estimada**: 20 minutos
-
-10. **[COMPATIBILIDAD_ZSH.md](COMPATIBILIDAD_ZSH.md)** - Compatibilidad con Zsh
+9. **[COMPATIBILIDAD_ZSH.md](COMPATIBILIDAD_ZSH.md)** - Compatibilidad con Zsh
     - Análisis de todos los scripts
     - Guía para usuarios de Zsh
     - **Lectura estimada**: 15 minutos
@@ -202,7 +197,7 @@ devdeb/
 │   ├── app-neovim.sh
 │   └── select-dev-language.sh
 │
-└── (Más scripts disponibles en proyecto Omakub original)
+└── (Más scripts disponibles en proyecto DevDeb original)
 ```
 
 ---
@@ -256,8 +251,8 @@ devdeb/
 ## 🔗 Enlaces Externos Útiles
 
 ### Proyecto Original
-- **Omakub**: https://omakub.org
-- **Repositorio**: https://github.com/basecamp/omakub
+- **DevDeb**: https://devdeb.org
+- **Repositorio**: https://github.com/basecamp/devdeb
 
 ### Herramientas Principales
 - **Mise**: https://mise.jdx.dev/
@@ -308,7 +303,7 @@ Después de la instalación:
 
 ### Comunidad
 - Debian Forums: https://forums.debian.net/
-- Omakub Issues: https://github.com/basecamp/omakub/issues
+- DevDeb Issues: https://github.com/basecamp/devdeb/issues
 
 ---
 

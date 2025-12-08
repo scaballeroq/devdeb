@@ -6,7 +6,7 @@
 # Descripción:
 #   Este script instala Neovim y lo configura con LazyVim, una distribución
 #   moderna de Neovim con plugins preconfigurados. Es completamente independiente
-#   y no requiere tener Omakub instalado.
+#   y no requiere tener DevDeb instalado.
 #
 # Componentes instalados:
 #   - Neovim stable (última versión)

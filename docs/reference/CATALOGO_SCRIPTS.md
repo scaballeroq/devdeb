@@ -1,8 +1,8 @@
-# Catálogo Completo de Scripts de Omakub
+# Catálogo Completo de Scripts de DevDeb
 
 ## 📑 Índice de Scripts por Categoría
 
-Este documento proporciona una referencia rápida de todos los scripts disponibles en Omakub, organizados por categoría y función.
+Este documento proporciona una referencia rápida de todos los scripts disponibles en DevDeb, organizados por categoría y función.
 
 ---
 
@@ -16,7 +16,7 @@ Este documento proporciona una referencia rápida de todos los scripts disponibl
 - Muestra logo ASCII
 - Actualiza APT
 - Instala git
-- Clona repositorio Omakub
+- Clona repositorio DevDeb
 - Ejecuta install.sh
 
 ### `install.sh`
@@ -32,7 +32,7 @@ Este documento proporciona una referencia rápida de todos los scripts disponibl
 ### `ascii.sh`
 **Ubicación**: Raíz del proyecto  
 **Función**: Visualización de logo  
-**Descripción**: Muestra el logo de Omakub con degradado de colores
+**Descripción**: Muestra el logo de DevDeb con degradado de colores
 
 ---
 
@@ -310,7 +310,7 @@ Este documento proporciona una referencia rápida de todos los scripts disponibl
 
 #### `install/desktop/set-gnome-theme.sh`
 **Función**: Tema visual  
-**Aplica**: Tema personalizado de Omakub
+**Aplica**: Tema personalizado de DevDeb
 
 #### `install/desktop/set-dock.sh`
 **Función**: Configuración del dock  
@@ -377,21 +377,21 @@ Este documento proporciona una referencia rápida de todos los scripts disponibl
 
 ### Script Principal
 
-#### `bin/omakub`
-**Función**: Comando principal de Omakub  
+#### `bin/devdeb`
+**Función**: Comando principal de DevDeb  
 **Muestra**: Menú interactivo con opciones  
 **Opciones**:
 - Theme: Cambiar tema
 - Font: Cambiar fuente
-- Update: Actualizar Omakub
+- Update: Actualizar DevDeb
 - Install: Instalar componentes
 - Uninstall: Desinstalar componentes
 - Manual: Ver manual
 
-### Subcomandos (`bin/omakub-sub/`)
+### Subcomandos (`bin/devdeb-sub/`)
 
 #### `header.sh`
-**Función**: Mostrar cabecera de Omakub  
+**Función**: Mostrar cabecera de DevDeb  
 **Muestra**: Logo y versión
 
 #### `menu.sh`
@@ -419,7 +419,7 @@ Este documento proporciona una referencia rápida de todos los scripts disponibl
 **Aplica a**: Alacritty y otros terminales
 
 #### `update.sh`
-**Función**: Actualizar Omakub  
+**Función**: Actualizar DevDeb  
 **Ejecuta**:
 - git pull del repositorio
 - Migraciones si es necesario
@@ -562,7 +562,7 @@ Cada tema incluye configuraciones para:
 
 ### Ubicación: `migrations/`
 
-Scripts numerados que se ejecutan al actualizar Omakub para aplicar cambios necesarios entre versiones.
+Scripts numerados que se ejecutan al actualizar DevDeb para aplicar cambios necesarios entre versiones.
 
 ---
 
@@ -577,7 +577,7 @@ Archivos .sh que crean lanzadores .desktop para aplicaciones:
 - Docker.sh
 - HEY.sh
 - Neovim.sh
-- Omakub.sh
+- DevDeb.sh
 - WhatsApp.sh
 
 ---
@@ -591,7 +591,7 @@ Archivos .sh que crean lanzadores .desktop para aplicaciones:
 | Terminal | ~17 | install/terminal/ |
 | Desktop | ~30 | install/desktop/ |
 | Desktop opcionales | ~22 | install/desktop/optional/ |
-| Utilidades bin | ~12 | bin/omakub-sub/ |
+| Utilidades bin | ~12 | bin/devdeb-sub/ |
 | Temas | ~72 | themes/ |
 | Migraciones | ~15 | migrations/ |
 | Lanzadores | ~8 | applications/ |
@@ -612,7 +612,7 @@ Archivos .sh que crean lanzadores .desktop para aplicaciones:
 
 - **README.md**: Guía completa de uso
 - **Scripts comentados**: Cada script en devdeb/ tiene comentarios detallados
-- **Documentación oficial**: https://omakub.org
+- **Documentación oficial**: https://devdeb.org
 
 ---
 
