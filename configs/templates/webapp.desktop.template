@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name={{APP_NAME}}
+Comment={{APP_COMMENT}}
+Exec=/usr/bin/google-chrome --profile-directory=Default --app={{APP_URL}}
+Icon={{APP_ICON}}
+Terminal=false
+Categories=WebApp;
+StartupWMClass=crx_{{APP_ID}}

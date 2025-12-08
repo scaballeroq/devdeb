@@ -541,34 +541,81 @@ mv ~/.inputrc.bak ~/.inputrc
 ## 📚 Estructura del Proyecto
 
 ```
-omakub/
-├── boot.sh                 # Script de arranque
-├── install.sh              # Instalador principal
-├── ascii.sh                # Logo ASCII
-├── install/
-│   ├── check-version.sh    # Verificación de versión
-│   ├── first-run-choices.sh # Selección inicial
-│   ├── identification.sh   # Configuración de usuario
-│   ├── terminal.sh         # Instalador de terminal
-│   ├── desktop.sh          # Instalador de desktop
-│   ├── terminal/           # Scripts de terminal
+devdeb/
+├── README.md              # Enlace simbólico a docs/README.md
+├── LICENSE
+├── .gitignore
+│
+├── bin/                   # Comandos ejecutables
+│   └── devdeb            # Comando principal interactivo
+│
+├── scripts/               # Scripts organizados por categoría
+│   ├── core/             # Scripts principales
+│   │   ├── boot.sh
+│   │   ├── install.sh
+│   │   └── ascii.sh
+│   ├── setup/            # Configuración inicial
+│   │   ├── check-version.sh
+│   │   ├── first-run-choices.sh
+│   │   └── identification.sh
+│   ├── shell/            # Configuración de shell
 │   │   ├── a-shell.sh
+│   │   └── functions.sh
+│   ├── tools/            # Instaladores de herramientas
 │   │   ├── docker.sh
 │   │   ├── mise.sh
-│   │   ├── app-*.sh
-│   │   └── select-*.sh
-│   └── desktop/            # Scripts de desktop
-│       ├── app-*.sh
-│       ├── set-*.sh
-│       └── optional/
-├── bin/
-│   ├── omakub             # Comando principal
-│   └── omakub-sub/        # Subcomandos
-├── configs/               # Archivos de configuración
-├── themes/                # Temas visuales
-├── defaults/              # Configuraciones por defecto
-├── migrations/            # Scripts de migración
-└── applications/          # Lanzadores de aplicaciones
+│   │   ├── install-modern-tools.sh
+│   │   └── install-starship.sh
+│   ├── apps/             # Instaladores de aplicaciones
+│   │   ├── app-neovim.sh
+│   │   ├── install-neovim.sh
+│   │   └── install-webapps.sh
+│   └── dev/              # Desarrollo
+│       └── select-dev-language.sh
+│
+├── lib/                   # Librerías compartidas
+│   ├── colors.sh         # Definiciones de colores
+│   ├── utils.sh          # Funciones de utilidad
+│   └── validators.sh     # Funciones de validación
+│
+├── configs/               # Configuraciones
+│   ├── bash/
+│   │   └── inputrc
+│   ├── zsh/
+│   │   └── zshrc
+│   ├── neovim/
+│   │   ├── lazyvim.json
+│   │   ├── theme-tokyonight.lua
+│   │   ├── transparency.lua
+│   │   └── snacks-animated-scrolling-off.lua
+│   ├── starship.toml
+│   └── templates/        # Plantillas reutilizables
+│       └── webapp.desktop.template
+│
+├── docs/                  # Documentación organizada
+│   ├── README.md         # Documentación principal
+│   ├── getting-started/  # Guías iniciales
+│   │   ├── INDEX.md
+│   │   └── GUIA_ADAPTACION_DEBIAN.md
+│   ├── guides/           # Guías de uso
+│   │   ├── GUIA_WEB2APP.md
+│   │   ├── GUIA_NEOVIM.md
+│   │   ├── GUIA_STARSHIP.md
+│   │   └── GUIA_HERRAMIENTAS_MODERNAS.md
+│   ├── reference/        # Referencias técnicas
+│   │   ├── CATALOGO_SCRIPTS.md
+│   │   ├── DOCUMENTACION_FUNCTIONS.md
+│   │   └── ANALISIS_DEPENDENCIAS.md
+│   └── technical/        # Documentación técnica
+│       ├── ANALISIS_OMARCHY.md
+│       ├── COMPATIBILIDAD_ZSH.md
+│       ├── COMPATIBILIDAD_MISE.md
+│       ├── MISE_ZSH.md
+│       ├── CAMBIOS_NOMENCLATURA.md
+│       └── RESUMEN_PROYECTO.md
+│
+└── examples/              # Ejemplos de uso
+    └── custom-webapp.sh
 ```
 
 ## 🤝 Contribuir
