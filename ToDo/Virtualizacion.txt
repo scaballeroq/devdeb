@@ -1,0 +1,102 @@
+##########################################################################
+VIRTUALIZACION
+###########################################################################
+https://sysguides.com/install-kvm-on-linux
+##########
+Paso 1: Instalación de Paquetes Base
+Abre una terminal e instala todos los componentes esenciales, incluyendo herramientas para soporte de UEFI (ovmf) y TPM (swtpm) necesarias para Windows 11, y herramientas de manejo (guestfs-tools).
+sudo apt update
+sudo apt install qemu-system-x86 libvirt-daemon-system virtinst \
+    virt-manager virt-viewer ovmf swtpm qemu-utils guestfs-tools \
+    libosinfo-bin
+    
+Paso 2: Descarga de Drivers VirtIO para Windows
+Los drivers VirtIO mejoran drásticamente el rendimiento de las máquinas virtuales Windows. Descarga la ISO de drivers para tenerla lista cuando instales Windows 10 u 11.
+# Crea y navega a un directorio para los drivers
+mkdir -p ~/Descargas/virtio-drivers
+cd ~/Descargas/virtio-drivers
+
+# Descarga la ISO de drivers VirtIO
+wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1//virtio-win-0.1.271.iso
+
+Paso 3: Habilitar el Servicio Libvirt
+Libvirt es el servicio principal que gestiona la virtualización. Asegúrate de que esté activo y se inicie automáticamente.
+# Habilita y arranca el servicio de Libvirt
+sudo systemctl enable --now libvirtd.service
+
+Paso 4: Reinicio y Verificación
+Para que los cambios de instalación y los módulos del kernel se carguen correctamente, reinicia tu sistema.
+reboot
+Después de reiniciar, verifica que tu sistema está listo para KVM:
+# El resultado debe mostrar "PASS" en todos los cheques importantes
+sudo virt-host-validate qemu
+
+Paso 5: Optimización Opcional de Rendimiento (tuned)
+Este paso es opcional. tuned es un demonio que ajusta dinámetros del sistema operativo para mejorar el rendimiento. El perfil virtual-host optimiza el sistema para ejecutar máquinas virtuales.
+
+Si decides usarlo:
+# 5.1 Instala tuned si no se instaló con los paquetes anteriores
+sudo apt install tuned
+
+# 5.2 Habilita e inicia el servicio tuned
+sudo systemctl enable --now tuned
+
+# 5.3 Muestra el perfil activo (debe ser 'current' o 'default')
+tuned-adm active
+tuned-adm list
+
+# 5.4 Aplica el perfil de optimización para anfitriones de virtualización
+sudo tuned-adm profile virtual-host
+
+# 5.5 Verifica que el nuevo perfil esté activo
+tuned-adm active
+
+# 5.6 Opcional: Verifica los cambios aplicados (debe decir "Verify successful.")
+sudo tuned-adm verify
+
+Paso 6: Configuración de Red por Defecto
+Libvirt gestiona una red virtual por defecto (default) que permite a las VMs acceder a Internet. Asegúrate de que esté funcionando y se inicie automáticamente.
+# Muestra el estado de la red virtual
+sudo virsh net-list --all
+
+# Inicia la red "default" (si está en estado "inactive")
+sudo virsh net-start default
+
+# Configura la red "default" para que inicie automáticamente al arrancar
+sudo virsh net-autostart default
+
+Paso 7: Configuración de Usuario y URI de Libvirt
+Para gestionar las VMs fácilmente sin sudo (usando virt-manager o virsh), añade tu usuario al grupo libvirt
+# Añade tu usuario al grupo libvirt (reemplaza $USER si es necesario)
+sudo usermod -aG libvirt $USER
+
+# Muestra la URI actual (debería ser qemu:///system)
+virsh uri
+sudo virsh uri
+
+# Configura la URI por defecto para las herramientas (asumiendo .zshrc)
+echo "export LIBVIRT_DEFAULT_URI='qemu:///system'" >> ~/.zshrc
+
+# Carga la configuración en tu sesión actual
+source ~/.zshrc
+
+# Verifica que se haya establecido la variable
+virsh uri
+
+Paso 8: Configuración de Permisos en el Directorio de Imágenes
+El directorio donde se almacenan las imágenes de disco (/var/lib/libvirt/images) suele ser propiedad de root. Es útil darle a tu usuario (ahora parte del grupo libvirt) permisos explícitos para gestionar archivos en ese directorio. Reemplaza $USER con tu nombre de usuario si es diferente.
+
+# Muestra el contenido del directorio
+ls /var/lib/libvirt/images/
+
+# Elimina las ACLs existentes (si las hay) para empezar limpio
+sudo setfacl -R -b /var/lib/libvirt/images
+
+# Establece permisos para que tu usuario tenga control completo
+# -R: Recursivo; -m: Modificar; d: Por defecto (para archivos futuros)
+sudo setfacl -R -b /var/lib/libvirt/images
+sudo setfacl -R -m u:caballero:rwX /var/lib/libvirt/images
+sudo setfacl -m d:u:caballero:rwx /var/lib/libvirt/images
+
+# Verifica los permisos aplicados
+getfacl /var/lib/libvirt/images

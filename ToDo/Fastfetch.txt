@@ -1,0 +1,5 @@
+############### FASTFETCH ###############
+sudo apt install fastfetch
+fastfetch --gen-config
+cp ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc.bak
+gnome-text-editor /home/caballero/.config/fastfetch/config.jsonc
