@@ -1,5 +1,0 @@
-############### HUELLA DACTILAR ###############
-sudo apt update
-sudo apt install fprintd libpam-fprintd
-fprintd-enroll
-sudo pam-auth-update
