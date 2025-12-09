@@ -10,7 +10,7 @@
 #
 # Funciones:
 #   1. Muestra el logo ASCII de DevDeb con colores
-#   2. Verifica que el sistema sea Ubuntu 24.04+ (adaptar para Debian)
+#   2. Verifica que el sistema sea Debian 13 (Trixie)
 #   3. Actualiza los repositorios APT
 #   4. Instala git (necesario para clonar el repositorio)
 #   5. Clona el repositorio de DevDeb en ~/.local/share/devdeb
@@ -20,28 +20,30 @@
 # Variables de entorno:
 #   DEVDEB_REF: Rama o tag a usar (por defecto: stable)
 #
-# Adaptaciones para Debian:
-#   - Cambiar verificación de Ubuntu a Debian en check-version.sh
-#   - Verificar que los paquetes estén disponibles en repositorios Debian
+# Notas:
+#   - Diseñado específicamente para Debian 13 (Trixie)
+#   - Verifica compatibilidad en check-version.sh
+#   - Los paquetes deben estar disponibles en repositorios Debian
 ################################################################################
 
 # Salir inmediatamente si un comando falla
 set -e
 
 # Arte ASCII del logo de DevDeb
-ascii_art='________                  __        ___.
-\_____  \   _____ _____  |  | ____ _\_ |__
- /   |   \ /     \\__   \ |  |/ /  |  \ __ \
-/    |    \  Y Y  \/ __ \|    <|  |  / \_\ \
-\_______  /__|_|  (____  /__|_ \____/|___  /
-        \/      \/     \/     \/         \/
+ascii_art='
+  ____             ____       __  
+ |  _ \  _____   _|  _ \  ___| |__ 
+ | | | |/ _ \ \ / / | | |/ _ \ '\''_ \
+ | |_| |  __/\ V /| |_| |  __/ |_) |
+ |____/ \___| \_/ |____/ \___|_.__/
+
 '
 
 # Mostrar el logo ASCII
 echo -e "$ascii_art"
 
 # Mensaje de advertencia sobre compatibilidad
-echo "=> DevDeb is for fresh Ubuntu 24.04+ installations only!"
+echo "=> DevDeb is for fresh Debian 13 (Trixie) installations only!"
 echo -e "\nBegin installation (or abort with ctrl+c)..."
 
 # Actualizar la lista de paquetes disponibles (silenciosamente)
@@ -56,7 +58,7 @@ echo "Cloning DevDeb..."
 rm -rf ~/.local/share/devdeb
 
 # Clonar el repositorio de DevDeb en el directorio local del usuario
-git clone https://github.com/basecamp/devdeb.git ~/.local/share/devdeb >/dev/null
+git clone https://github.com/scaballeroq/devdeb.git ~/.local/share/devdeb >/dev/null
 
 # Si se especificó una rama/tag diferente a master, cambiar a ella
 if [[ $DEVDEB_REF != "master" ]]; then
