@@ -1,7 +1,0 @@
-############### FONTS ###############
-sudo apt -y install fonts-freefont-ttf fonts-freefont-otf ttf-mscorefonts-installer fonts-ubuntu
-Instalar Nerd Font Mono
-https://www.nerdfonts.com/
-mkdir ~/.local/share/fonts
-cp *.* ~/.local/share/fonts
-fc-cache -fv

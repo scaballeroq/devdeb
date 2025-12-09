@@ -76,6 +76,12 @@ Bienvenido al proyecto **DevDeb**, una adaptación de DevDeb para Debian 13 Trix
     - Ejemplos de uso y proyectos de inicio
     - **Lectura estimada**: 30-35 minutos
 
+11. **[GUIA_POST_INSTALACION.md](GUIA_POST_INSTALACION.md)** - Configuración Post-Instalación GNOME
+    - Script automatizado de configuración inicial
+    - Software esencial, codecs, temas y herramientas
+    - Explicación detallada de cada componente
+    - **Lectura estimada**: 25-30 minutos
+
 9. **[COMPATIBILIDAD_ZSH.md](COMPATIBILIDAD_ZSH.md)** - Compatibilidad con Zsh
     - Análisis de todos los scripts
     - Guía para usuarios de Zsh
