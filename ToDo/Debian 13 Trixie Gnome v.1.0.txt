@@ -17,14 +17,6 @@ sudo apt -y install gstreamer1.0-pulseaudio gstreamer1.0-plugins-bad gstreamer1.
 ############### ASPECTO ###############
 sudo apt -y install papirus-icon-theme
 
-############### FONTS ###############
-sudo apt -y install fonts-freefont-ttf fonts-freefont-otf ttf-mscorefonts-installer fonts-ubuntu
-Instalar Nerd Font Mono
-https://www.nerdfonts.com/
-mkdir ~/.local/share/fonts
-cp *.* ~/.local/share/fonts
-fc-cache -fv
-
 ############### PIPEWIRE ###############
 inxi -Aa
     
