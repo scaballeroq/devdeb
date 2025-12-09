@@ -1,0 +1,74 @@
+csnapper -c root create -t pre -c number -d 'pre comentario'
+snapper -c root create -t post --pre-number NUMERO -c number -d 'post comentario
+
+snapper -c home create -t pre -c number -d 'pre comentario
+snapper -c home create -t post --pre-number NUMERO -c number -d 'post comentario
+
+snapper -c root ls
+snapper -c home ls
+
+sudo snapper -c home create-config /home
+
+mv -v ~/.thunderbird/ ~/.thunderbird-old
+sudo btrfs subvolume create ~/.thunderbird
+sudo chown -Rv $USER: .thunderbird/
+cp -arv ~/.thunderbird-old/. ~/.thunderbird/
+rm -rfv ~/.thunderbird-old/
+
+mv -v ~/.mozilla/ ~/.mozilla-old
+btrfs subvolume create ~/.mozilla
+sudo chown -Rv $USER: .mozilla/
+cp -arv ~/.mozilla-old/. ~/.mozilla/
+rm -rfv ~/.mozilla-old/
+
+mv -v ~/.googleearth/ ~/.googleearth-old
+btrfs subvolume create ~/.googleearth
+sudo chown -Rv $USER: .googleearth/
+cp -arv ~/.googleearth-old/. ~/.googleearth/
+rm -rfv ~/.googleearth-old/
+
+mv -v ~/.gemini/ ~/.gemini-old
+btrfs subvolume create ~/.gemini
+sudo chown -Rv $USER: .gemini/
+cp -arv ~/.gemini-old/. ~/.gemini/
+rm -rfv ~/.gemini-old/
+
+mv -v ~/.config/google-chrome/ ~/.config/google-chrome-old
+btrfs subvolume create ~/.config/google-chrome
+sudo chown -Rv $USER: .config/google-chrome/
+cp -arv ~/.config/google-chrome-old/. ~/.config/google-chrome/
+rm -rfv ~/.config/google-chrome/
+
+mv -v ~/.gnupg/ ~/.gnupg-old
+btrfs subvolume create ~/.gnupg
+sudo chown -Rv $USER: .gnupg/
+cp -arv ~/.gnupg-old/. ~/.gnupg/
+rm -rfv ~/.gnupg-old/
+
+mv -v ~/Descargas/ ~/Descargas-old
+btrfs subvolume create ~/Descargas
+sudo chown -Rv $USER: Descargas/
+
+mv -v ~/Documentos/ ~/Documentos-old
+btrfs subvolume create ~/Documentos
+sudo chown -Rv $USER: Documentos/
+
+mv -v ~/Imágenes/ ~/Imágenes-old
+btrfs subvolume create ~/Imágenes
+sudo chown -Rv $USER: Imágenes/
+
+mv -v ~/Música/ ~/Música-old
+btrfs subvolume create ~/Música
+sudo chown -Rv $USER: Música/
+
+mv -v ~/Vídeos/ ~/Vídeos-old
+btrfs subvolume create ~/Vídeos
+sudo chown -Rv $USER: Vídeos/
+
+btrfs subvolume create ~/Escritorio
+sudo chown -Rv $USER: Descargas/
+
+btrfs subvolume create ~/.Telegram
+sudo chown -Rv $USER: .Telegram/
+
+

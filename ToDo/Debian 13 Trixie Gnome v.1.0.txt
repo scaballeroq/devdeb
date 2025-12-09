@@ -1,0 +1,224 @@
+############### SOFTWARE ###############
+sudo apt -y install linux-headers-$(uname -r)
+sudo apt -y install build-essential checkinstall make automake cmake autoconf curl btop htop git inxi gcc libfuse2
+sudo apt install -y exfat-fuse hfsplus 
+sudo apt install -y vlc gimp gparted
+sudo apt install -y p7zip-full p7zip-rar unrar zip unzip bzip2 lzma
+
+############### TIENDAS ###############
+sudo apt -y install synaptic
+sudo apt -y install flatpak
+sudo apt -y install gnome-software-plugin-flatpak
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+############### CODECS ###############
+sudo apt -y install gstreamer1.0-pulseaudio gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav libavcodec-extra vorbis-tools ffmpeg ffmpeg-doc
+
+############### ASPECTO ###############
+sudo apt -y install papirus-icon-theme
+
+############### FONTS ###############
+sudo apt -y install fonts-freefont-ttf fonts-freefont-otf ttf-mscorefonts-installer fonts-ubuntu
+Instalar Nerd Font Mono
+https://www.nerdfonts.com/
+mkdir ~/.local/share/fonts
+cp *.* ~/.local/share/fonts
+fc-cache -fv
+
+############### ZSH ###############
+sudo apt -y install zsh lsd bat
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
+echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+source .zshrc
+
+cd ~
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autocomplete
+
+gnome-text-editor ~/.zshrc
+
+    plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
+    plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-autocomplete)
+
+    fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+    source "$ZSH/oh-my-zsh.sh"
+
+    #AL FINAL DEL FICHERO
+
+    # Alias
+    alias ls='lsd'
+    alias ll='lsd -l'
+    alias la='lsd -a'
+    alias lla='lsd -la'
+    alias cat='bat'
+
+
+############### PIPEWIRE ###############
+inxi -Aa
+    
+############### MESA ###############
+glxinfo | grep "OpenGL version"    
+
+############### FASTFETCH ###############
+sudo apt install fastfetch
+fastfetch --gen-config
+cp ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc.bak
+gnome-text-editor /home/caballero/.config/fastfetch/config.jsonc
+
+############## PROGRAMACIÓN ###############
+sudo apt install podman
+sudo apt install python3-pip python3-venv
+
+############### HUELLA DACTILAR ###############
+sudo apt update
+sudo apt install fprintd libpam-fprintd
+fprintd-enroll
+sudo pam-auth-update
+
+##########################################################################
+VIRTUALIZACION
+###########################################################################
+https://sysguides.com/install-kvm-on-linux
+##########
+Paso 1: Instalación de Paquetes Base
+Abre una terminal e instala todos los componentes esenciales, incluyendo herramientas para soporte de UEFI (ovmf) y TPM (swtpm) necesarias para Windows 11, y herramientas de manejo (guestfs-tools).
+sudo apt update
+sudo apt install qemu-system-x86 libvirt-daemon-system virtinst \
+    virt-manager virt-viewer ovmf swtpm qemu-utils guestfs-tools \
+    libosinfo-bin
+    
+Paso 2: Descarga de Drivers VirtIO para Windows
+Los drivers VirtIO mejoran drásticamente el rendimiento de las máquinas virtuales Windows. Descarga la ISO de drivers para tenerla lista cuando instales Windows 10 u 11.
+# Crea y navega a un directorio para los drivers
+mkdir -p ~/Descargas/virtio-drivers
+cd ~/Descargas/virtio-drivers
+
+# Descarga la ISO de drivers VirtIO
+wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1//virtio-win-0.1.271.iso
+
+Paso 3: Habilitar el Servicio Libvirt
+Libvirt es el servicio principal que gestiona la virtualización. Asegúrate de que esté activo y se inicie automáticamente.
+# Habilita y arranca el servicio de Libvirt
+sudo systemctl enable --now libvirtd.service
+
+Paso 4: Reinicio y Verificación
+Para que los cambios de instalación y los módulos del kernel se carguen correctamente, reinicia tu sistema.
+reboot
+Después de reiniciar, verifica que tu sistema está listo para KVM:
+# El resultado debe mostrar "PASS" en todos los cheques importantes
+sudo virt-host-validate qemu
+
+Paso 5: Optimización Opcional de Rendimiento (tuned)
+Este paso es opcional. tuned es un demonio que ajusta dinámetros del sistema operativo para mejorar el rendimiento. El perfil virtual-host optimiza el sistema para ejecutar máquinas virtuales.
+
+Si decides usarlo:
+# 5.1 Instala tuned si no se instaló con los paquetes anteriores
+sudo apt install tuned
+
+# 5.2 Habilita e inicia el servicio tuned
+sudo systemctl enable --now tuned
+
+# 5.3 Muestra el perfil activo (debe ser 'current' o 'default')
+tuned-adm active
+tuned-adm list
+
+# 5.4 Aplica el perfil de optimización para anfitriones de virtualización
+sudo tuned-adm profile virtual-host
+
+# 5.5 Verifica que el nuevo perfil esté activo
+tuned-adm active
+
+# 5.6 Opcional: Verifica los cambios aplicados (debe decir "Verify successful.")
+sudo tuned-adm verify
+
+Paso 6: Configuración de Red por Defecto
+Libvirt gestiona una red virtual por defecto (default) que permite a las VMs acceder a Internet. Asegúrate de que esté funcionando y se inicie automáticamente.
+# Muestra el estado de la red virtual
+sudo virsh net-list --all
+
+# Inicia la red "default" (si está en estado "inactive")
+sudo virsh net-start default
+
+# Configura la red "default" para que inicie automáticamente al arrancar
+sudo virsh net-autostart default
+
+Paso 7: Configuración de Usuario y URI de Libvirt
+Para gestionar las VMs fácilmente sin sudo (usando virt-manager o virsh), añade tu usuario al grupo libvirt
+# Añade tu usuario al grupo libvirt (reemplaza $USER si es necesario)
+sudo usermod -aG libvirt $USER
+
+# Muestra la URI actual (debería ser qemu:///system)
+virsh uri
+sudo virsh uri
+
+# Configura la URI por defecto para las herramientas (asumiendo .zshrc)
+echo "export LIBVIRT_DEFAULT_URI='qemu:///system'" >> ~/.zshrc
+
+# Carga la configuración en tu sesión actual
+source ~/.zshrc
+
+# Verifica que se haya establecido la variable
+virsh uri
+
+Paso 8: Configuración de Permisos en el Directorio de Imágenes
+El directorio donde se almacenan las imágenes de disco (/var/lib/libvirt/images) suele ser propiedad de root. Es útil darle a tu usuario (ahora parte del grupo libvirt) permisos explícitos para gestionar archivos en ese directorio. Reemplaza $USER con tu nombre de usuario si es diferente.
+
+# Muestra el contenido del directorio
+ls /var/lib/libvirt/images/
+
+# Elimina las ACLs existentes (si las hay) para empezar limpio
+sudo setfacl -R -b /var/lib/libvirt/images
+
+# Establece permisos para que tu usuario tenga control completo
+# -R: Recursivo; -m: Modificar; d: Por defecto (para archivos futuros)
+sudo setfacl -R -b /var/lib/libvirt/images
+sudo setfacl -R -m u:caballero:rwX /var/lib/libvirt/images
+sudo setfacl -m d:u:caballero:rwx /var/lib/libvirt/images
+
+# Verifica los permisos aplicados
+getfacl /var/lib/libvirt/images
+
+############### REPOSITORIOS MICROSOFT ###############
+sudo apt update
+sudo apt install curl gpg apt-transport-https -y
+
+sudo apt-get install wget gpg
+
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+
+sudo install -D -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft.gpg
+
+rm -f microsoft.gpg
+
+**** MICROSOFT EDGE
+sudo nano /etc/apt/sources.list.d/microsoft-edge.sources
+Types: deb
+URIs: https://packages.microsoft.com/repos/edge
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /usr/share/keyrings/microsoft.gpg
+
+sudo apt update
+sudo apt install microsoft-edge-stable
+
+**** VISUAL STUDIO CODE
+sudo nano /etc/apt/sources.list.d/vscode.sources
+Types: deb
+URIs: https://packages.microsoft.com/repos/code
+Suites: stable
+Components: main
+Architectures: amd64,arm64,armhf
+Signed-By: /usr/share/keyrings/microsoft.gpg
+	
+sudo apt update
+sudo apt install code # or code-insiders
+
+
+
+

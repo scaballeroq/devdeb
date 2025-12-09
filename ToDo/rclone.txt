@@ -1,0 +1,41 @@
+
+
+rclone sync GoogleDrive: /home/caballero/Workspace/GoogleDrive/  --tpslimit 20 --transfers 64 --checkers 128 --verbose --log-file /home/caballero/rclone_backup.log
+
+
+******************************************
+rclone sync /home/caballero/Documentos/ GoogleDrive:/Carpeta\ personal/Documentos/ --tpslimit 20 --transfers 64 --checkers 128 --verbose --log-file /home/caballero/rclone_backup_Documentos.log
+
+rclone sync /home/caballero/Imágenes/ GoogleDrive:/Carpeta\ personal/Imágenes/ --tpslimit 20 --transfers 64 --checkers 128 --verbose --log-file /home/caballero/rclone_backup_Imagenes.log
+
+rclone sync /home/caballero/Música/ GoogleDrive:/Carpeta\ personal/Música/ --tpslimit 20 --transfers 64 --checkers 128 --verbose --log-file /home/caballero/rclone_backup_Musica.log
+
+rclone sync /home/caballero/Vídeos/ GoogleDrive:/Carpeta\ personal/Vídeos/ --tpslimit 20 --transfers 64 --checkers 128 --verbose --log-file /home/caballero/rclone_backup_Videos.log
+
+rclone sync /home/caballero/Workspace/ GoogleDrive:/Carpeta\ personal/Workspace/ --tpslimit 20 --transfers 64 --checkers 128 --verbose --log-file /home/caballero/rclone_backup_Workspace.log
+
+rclone sync /run/media/televisor/RAID0_USB/Peliculas/ GoogleDrive:/Peliculas/ --tpslimit 20 --transfers 64 --checkers 128 --verbose --log-file /home/televisor/rclone_backup_Peliculas.log
+
+rclone sync /run/media/televisor/RAID0_USB/Series/ GoogleDrive:/Seriessss/ --tpslimit 20 --transfers 64 --checkers 128 --verbose --log-file /home/televisor/rclone_backup_Series.log
+
+rclone sync GoogleDrive:/Carpeta\ personal/ /home/caballero/ -tpslimit 20 --transfers 64 --checkers 128 --verbose --log-file /home/caballero/rclone_backup_CarpetaPersonal
+
+
+
+rclone sync \
+  GoogleDrive:/Carpeta\ personal/ \
+  /home/caballero/ \
+  --transfers 8 \
+  --checkers 16 \
+  --retries 3 \
+  --low-level-retries 10 \
+  --fast-list \
+  --verbose \
+  --log-file /home/caballero/rclone_backup_CarpetaPersonal.log
+  
+rclone sync \
+  GoogleDrive:/Carpeta\ personal/ \
+  /home/caballero/ \
+  --dry-run \
+  --verbose \
+  --log-file /home/caballero/rclone_backup_CarpetaPersonal_DRYRUN.log
