@@ -1,0 +1,39 @@
+# DevDeb .gitignore
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Directorios de caché
+__pycache__/
+*.pyc
+.cache/
+
+# Archivos de configuración local
+.env
+.env.local
+
+# Backups
+*.backup
+backup/
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-*
+
+# Node modules (si se añaden en el futuro)
+node_modules/
+
+# Archivos de prueba
+test-output/

@@ -1,0 +1,43 @@
+# Configuración de Starship para DevDeb
+
+# Añadir línea en blanco antes del prompt
+add_newline = true
+
+# Timeout para comandos (ms)
+command_timeout = 200
+
+# Formato del prompt: directorio + git + carácter
+format = "[$directory$git_branch$git_status]($style)$character"
+
+# Carácter del prompt
+[character]
+error_symbol = "[✗](bold cyan)"      # Símbolo cuando hay error
+success_symbol = "[❯](bold cyan)"    # Símbolo cuando todo OK
+
+# Configuración del directorio
+[directory]
+truncation_length = 2                 # Mostrar solo 2 niveles de profundidad
+truncation_symbol = "…/"              # Símbolo para directorios truncados
+repo_root_style = "bold cyan"         # Estilo para raíz de repositorio
+repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+
+# Rama de Git
+[git_branch]
+format = "[$branch]($style) "         # Formato: nombre de rama
+style = "italic cyan"                 # Estilo: cyan itálico
+
+# Estado de Git
+[git_status]
+format = '[$all_status]($style)'      # Mostrar todos los estados
+style = "cyan"                        # Color cyan
+ahead = "⇡${count} "                  # Commits adelante
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "  # Divergencia
+behind = "⇣${count} "                 # Commits atrás
+conflicted = " "                      # Conflictos
+up_to_date = " "                      # Actualizado
+untracked = "? "                      # Archivos sin seguimiento
+modified = " "                        # Archivos modificados
+stashed = ""                          # Cambios guardados
+staged = ""                           # Cambios en stage
+renamed = ""                          # Archivos renombrados
+deleted = ""                          # Archivos eliminados

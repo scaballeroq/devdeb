@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+# DevDeb - Comando principal
+# Este script proporciona un menú interactivo para gestionar DevDeb
+
+set -e
+
+# Obtener directorio del proyecto
+DEVDEB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Cargar librerías
+source "$DEVDEB_DIR/lib/colors.sh"
+source "$DEVDEB_DIR/lib/utils.sh"
+
+# Banner
+show_banner() {
+    print_header "DevDeb - Configuración de Desarrollo para Debian 13"
+    echo "Directorio del proyecto: $DEVDEB_DIR"
+    echo ""
+}
+
+# Menú principal
+show_menu() {
+    echo "Selecciona una opción:"
+    echo ""
+    echo "  1) Instalar herramientas de terminal"
+    echo "  2) Instalar aplicaciones"
+    echo "  3) Configurar shell (Bash/Zsh)"
+    echo "  4) Instalar Docker"
+    echo "  5) Instalar Mise (gestor de versiones)"
+    echo "  6) Instalar Neovim + LazyVim"
+    echo "  7) Instalar Starship (prompt moderno)"
+    echo "  8) Instalar herramientas CLI modernas"
+    echo "  9) Instalar WebApps"
+    echo "  10) Ver documentación"
+    echo "  11) Validar sistema"
+    echo "  0) Salir"
+    echo ""
+}
+
+# Ejecutar script
+run_script() {
+    local script_path="$1"
+    if [ -f "$script_path" ]; then
+        print_step "Ejecutando: $script_path"
+        bash "$script_path"
+    else
+        print_error "Script no encontrado: $script_path"
+    fi
+}
+
+# Abrir documentación
+open_docs() {
+    local doc_path="$DEVDEB_DIR/docs"
+    if command_exists xdg-open; then
+        xdg-open "$doc_path"
+    else
+        print_info "Documentación disponible en: $doc_path"
+        ls -la "$doc_path"
+    fi
+}
+
+# Validar sistema
+validate_system_menu() {
+    source "$DEVDEB_DIR/lib/validators.sh"
+    validate_system
+    echo ""
+    read -r -p "Presiona Enter para continuar..."
+}
+
+# Bucle principal
+main() {
+    show_banner
+    
+    while true; do
+        show_menu
+        read -r -p "Opción: " option
+        echo ""
+        
+        case $option in
+            1)
+                run_script "$DEVDEB_DIR/scripts/tools/install-modern-tools.sh"
+                ;;
+            2)
+                print_info "Instalación de aplicaciones individuales disponible en scripts/apps/"
+                ls -1 "$DEVDEB_DIR/scripts/apps/"
+                ;;
+            3)
+                run_script "$DEVDEB_DIR/scripts/shell/a-shell.sh"
+                ;;
+            4)
+                run_script "$DEVDEB_DIR/scripts/tools/docker.sh"
+                ;;
+            5)
+                run_script "$DEVDEB_DIR/scripts/tools/mise.sh"
+                ;;
+            6)
+                run_script "$DEVDEB_DIR/scripts/apps/install-neovim.sh"
+                ;;
+            7)
+                run_script "$DEVDEB_DIR/scripts/tools/install-starship.sh"
+                ;;
+            8)
+                run_script "$DEVDEB_DIR/scripts/tools/install-modern-tools.sh"
+                ;;
+            9)
+                run_script "$DEVDEB_DIR/scripts/apps/install-webapps.sh"
+                ;;
+            10)
+                open_docs
+                ;;
+            11)
+                validate_system_menu
+                ;;
+            0)
+                print_success "¡Hasta luego!"
+                exit 0
+                ;;
+            *)
+                print_error "Opción inválida"
+                ;;
+        esac
+        
+        echo ""
+        read -r -p "Presiona Enter para continuar..."
+        clear
+        show_banner
+    done
+}
+
+# Ejecutar
+main
