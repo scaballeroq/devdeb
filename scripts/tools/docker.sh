@@ -21,9 +21,8 @@
 #   2. Limita el tamaño de logs (10MB por archivo, máximo 5 archivos)
 #
 # Adaptaciones para Debian:
-#   - Cambiar URL de repositorio de Ubuntu a Debian
-#   - URL: https://download.docker.com/linux/debian/
-#   - Usar $(lsb_release -cs) o 'bookworm'/'trixie' según versión
+#   - URL configurada para Debian (https://download.docker.com/linux/debian/)
+#   - Compatible con versiones recientes (bookworm, trixie, etc.)
 #
 # Nota importante:
 #   Después de la instalación, es necesario cerrar sesión y volver a entrar
@@ -39,8 +38,8 @@ if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
     sudo install -m 0755 -d /etc/apt/keyrings
     
     # Descargar la clave GPG oficial de Docker
-    # ADAPTACIÓN DEBIAN: Cambiar /ubuntu/ por /debian/
-    sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/ubuntu/gpg
+    # Descargar la clave GPG oficial de Docker
+    sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg
     
     # Hacer la clave legible para todos los usuarios
     sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -48,8 +47,8 @@ if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
     # Añadir el repositorio de Docker a las fuentes de APT
     # $(dpkg --print-architecture): Detecta la arquitectura (amd64, arm64, etc.)
     # $(. /etc/os-release && echo "$VERSION_CODENAME"): Obtiene el nombre de la versión (jammy, noble, etc.)
-    # ADAPTACIÓN DEBIAN: Cambiar /ubuntu/ por /debian/ y verificar VERSION_CODENAME
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+    # Configurar el repositorio para Debian
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 fi
 
 # Actualizar la lista de paquetes con el nuevo repositorio
