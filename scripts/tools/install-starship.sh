@@ -71,12 +71,21 @@ success "Todos los requisitos están instalados"
 
 info "Instalando Starship..."
 
-# Descargar e instalar Starship usando el instalador oficial
-# El instalador detecta automáticamente el sistema y la arquitectura
-if curl -sS https://starship.rs/install.sh | sh -s -- -y; then
+# Descargar e instalar Starship (Instalación manual para evitar errores de detección de plataforma)
+STARSHIP_VERSION=$(curl -s https://api.github.com/repos/starship/starship/releases/latest | grep '"tag_name"' | sed -E 's/.*"v([^"]+)".*/\1/')
+
+if [ -z "$STARSHIP_VERSION" ]; then
+    error "No se pudo detectar la versión de Starship"
+    exit 1
+fi
+
+info "Descargando Starship v$STARSHIP_VERSION..."
+if curl -Lo /tmp/starship.tar.gz "https://github.com/starship/starship/releases/download/v${STARSHIP_VERSION}/starship-x86_64-unknown-linux-gnu.tar.gz"; then
+    sudo tar -xzf /tmp/starship.tar.gz -C /usr/local/bin
+    rm /tmp/starship.tar.gz
     success "Starship instalado correctamente"
 else
-    error "No se pudo instalar Starship"
+    error "Error al descargar Starship"
     exit 1
 fi
 
@@ -94,8 +103,16 @@ info "Configurando Starship..."
 mkdir -p ~/.config
 
 # Copiar configuración de DevDeb
+# Copiar configuración de DevDeb
+ST_CONFIG=""
 if [ -f "$SCRIPT_DIR/configs/starship.toml" ]; then
-    cp "$SCRIPT_DIR/configs/starship.toml" ~/.config/starship.toml
+    ST_CONFIG="$SCRIPT_DIR/configs/starship.toml"
+elif [ -f "$SCRIPT_DIR/../../configs/starship.toml" ]; then
+    ST_CONFIG="$SCRIPT_DIR/../../configs/starship.toml"
+fi
+
+if [ -n "$ST_CONFIG" ]; then
+    cp "$ST_CONFIG" ~/.config/starship.toml
     success "Configuración de Starship instalada"
 else
     warning "No se encontró configuración de Starship en DevDeb"
