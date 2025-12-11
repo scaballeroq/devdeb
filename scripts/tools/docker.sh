@@ -58,6 +58,11 @@ sudo apt update
 # Instalar Docker Engine y todos los plugins estándar
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
 
+# Instalar Lazydocker
+# https://github.com/jesseduffield/lazydocker
+echo "Instalando Lazydocker..."
+curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | sudo bash
+
 # Dar al usuario actual acceso privilegiado a Docker
 # Esto permite ejecutar comandos docker sin sudo
 # IMPORTANTE: Requiere cerrar sesión y volver a entrar para que surta efecto
