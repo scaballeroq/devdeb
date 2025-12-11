@@ -15,6 +15,7 @@
 #   - docker-buildx-plugin: Constructor de imágenes multi-plataforma
 #   - docker-compose-plugin: Orquestación de múltiples contenedores
 #   - docker-ce-rootless-extras: Soporte para Docker sin root
+#   - lazydocker: Interfaz de terminal para Docker
 #
 # Configuraciones aplicadas:
 #   1. Añade el usuario actual al grupo docker (acceso sin sudo)
