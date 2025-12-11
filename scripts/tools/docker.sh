@@ -61,7 +61,11 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 # Instalar Lazydocker
 # https://github.com/jesseduffield/lazydocker
 echo "Instalando Lazydocker..."
-curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | sudo bash
+LAZYDOCKER_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazydocker/releases/latest" | grep '"tag_name"' | sed -E 's/.*"v([^"]+)".*/\1/')
+curl -Lo lazydocker.tar.gz "https://github.com/jesseduffield/lazydocker/releases/download/v${LAZYDOCKER_VERSION}/lazydocker_${LAZYDOCKER_VERSION}_Linux_x86_64.tar.gz"
+sudo tar xf lazydocker.tar.gz lazydocker
+sudo install lazydocker /usr/local/bin
+rm lazydocker.tar.gz lazydocker
 
 # Dar al usuario actual acceso privilegiado a Docker
 # Esto permite ejecutar comandos docker sin sudo
