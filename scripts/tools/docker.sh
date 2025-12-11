@@ -69,7 +69,7 @@ rm lazydocker.tar.gz lazydocker
 
 # Dar al usuario actual acceso privilegiado a Docker
 # Esto permite ejecutar comandos docker sin sudo
-# IMPORTANTE: Requiere cerrar sesión y volver a entrar para que surta efecto
+# IMPORTANTE: Requiere cerrar sesión y volver a entllarar para que surta efecto
 sudo usermod -aG docker ${USER}
 
 # Limitar el tamaño de los logs para evitar quedarse sin espacio en disco
