@@ -271,10 +271,30 @@ EOF
 fi
 
 ################################################################################
-# 6. INSTALACIÓN DE POWERSHELL
+# 6. CONFIGURACIÓN DE REPOSITORIO DE PRODUCTOS MICROSOFT (PowerShell / .NET)
+################################################################################
+if [ "$INSTALL_POWERSHELL" = true ] || [ "$INSTALL_DOTNET" = true ]; then
+    print_header "6. CONFIGURANDO REPOSITORIO DE PRODUCTOS MICROSOFT"
+    
+    print_info "Creando archivo de fuentes para Productos Microsoft..."
+    
+    # Crear archivo .sources para Productos Microsoft (.NET / PowerShell)
+    # Importante: Usamos el repositorio específico de Debian 13 (Trixie)
+    cat > /etc/apt/sources.list.d/microsoft-prod.list << 'EOF'
+deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/debian/13/prod trixie main
+EOF
+    
+    print_success "Repositorio de Productos Microsoft configurado"
+    
+    print_info "Actualizando lista de paquetes..."
+    apt update -qq
+fi
+
+################################################################################
+# 7. INSTALACIÓN DE POWERSHELL
 ################################################################################
 if [ "$INSTALL_POWERSHELL" = true ]; then
-    print_header "6. INSTALANDO POWERSHELL"
+    print_header "7. INSTALANDO POWERSHELL"
     
     print_info "PowerShell usa el mismo repositorio de Microsoft"
     apt update -qq
@@ -295,10 +315,10 @@ if [ "$INSTALL_POWERSHELL" = true ]; then
 fi
 
 ################################################################################
-# 7. INSTALACIÓN DE .NET SDK
+# 8. INSTALACIÓN DE .NET SDK
 ################################################################################
 if [ "$INSTALL_DOTNET" = true ]; then
-    print_header "7. INSTALANDO .NET SDK 8.0"
+    print_header "8. INSTALANDO .NET SDK 8.0"
     
     print_info ".NET SDK usa el mismo repositorio de Microsoft"
     apt update -qq
@@ -322,9 +342,9 @@ if [ "$INSTALL_DOTNET" = true ]; then
 fi
 
 ################################################################################
-# 8. CONFIGURACIÓN POST-INSTALACIÓN
+# 9. CONFIGURACIÓN POST-INSTALACIÓN
 ################################################################################
-print_header "8. CONFIGURACIÓN POST-INSTALACIÓN"
+print_header "9. CONFIGURACIÓN POST-INSTALACIÓN"
 
 if [ "$INSTALL_EDGE" = true ]; then
     print_info "Microsoft Edge:"
@@ -393,7 +413,7 @@ if [ "$INSTALL_DOTNET" = true ]; then
 fi
 
 ################################################################################
-# 9. RESUMEN FINAL
+# 10. RESUMEN FINAL
 ################################################################################
 print_header "INSTALACIÓN COMPLETADA"
 
